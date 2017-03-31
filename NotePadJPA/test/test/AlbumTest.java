@@ -22,9 +22,7 @@ public class AlbumTest {
 	public void setUp() throws Exception {
 		emf = Persistence.createEntityManagerFactory("TestNotePad");
 		em = emf.createEntityManager();
-		System.out.println("test");
 		album = em.find(Album.class, 1);
-		System.out.println("test");
 	}
 
 	@After
@@ -33,10 +31,13 @@ public class AlbumTest {
 		emf.close();
 
 	}
-
+	
 	@Test
-	public void test_Album_has_songs() {
-		assertEquals("", album.getSongs().size());
-
+	public void test_Album_Info(){
+		assertEquals("MTV Unplugged in New York (Live)", album.getTitle());
+		assertEquals(1994, album.getReleaseYear());
+		assertEquals( 3, album.getSongs().size());
+				
 	}
+	
 }

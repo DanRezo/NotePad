@@ -1,7 +1,5 @@
 package entities;
 
-import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -11,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
 
 @Entity
 public class Album {
