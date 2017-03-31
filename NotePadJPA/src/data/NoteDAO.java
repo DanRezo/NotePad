@@ -1,5 +1,5 @@
 package data;
 
-public class NoteDAO {
+public interface NoteDAO {
 
 }
