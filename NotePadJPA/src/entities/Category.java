@@ -1,5 +1,5 @@
 package entities;
 
 public enum Category {
-	ROCK, POP, HIPHOP, COUNTRY, RANDB
+	ROCK, POP, HIP_HOP, COUNTRY, R_AND_B
 }
