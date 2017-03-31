@@ -24,7 +24,7 @@ public class PlaylistTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		emf = Persistence.createEntityManagerFactory("notepad");
+		emf = Persistence.createEntityManagerFactory("TestNotePad");
 		em = emf.createEntityManager();
 		playlist = em.find(Playlist.class, 1);
 		song = em.find(Song.class, 21);
