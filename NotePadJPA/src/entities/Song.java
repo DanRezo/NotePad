@@ -22,7 +22,7 @@ public class Song {
 	@JoinColumn(name = "album_id")
 	private Album album;
 	@ManyToMany
-	@JoinTable(name = "playlist_user", 
+	@JoinTable(name = "song_playlist", 
 	joinColumns = @JoinColumn(name = "song_id"), 
 	inverseJoinColumns = @JoinColumn(name = "playlist_id"))
 	private List<Playlist> playlists;
