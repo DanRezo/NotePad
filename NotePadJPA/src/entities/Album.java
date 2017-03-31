@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 public class Album {
@@ -21,9 +20,8 @@ public class Album {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String title;
-	@Temporal(TemporalType.DATE)
 	@Column(name = "release_year")
-	private Date releaseYear;
+	private int releaseYear;
 	private String picture;
 	@OneToMany(mappedBy = "album")
 	private List<Song> songs;
@@ -40,11 +38,11 @@ public class Album {
 		this.title = title;
 	}
 
-	public Date getReleaseYear() {
+	public int getReleaseYear() {
 		return releaseYear;
 	}
 
-	public void setReleaseYear(Date releaseYear) {
+	public void setReleaseYear(int releaseYear) {
 		this.releaseYear = releaseYear;
 	}
 
