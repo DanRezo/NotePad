@@ -2,7 +2,7 @@
 <persistence version="2.1"
 	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-	<persistence-unit name="VideoStore">
+	<persistence-unit name="TestNotePad">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
 		<class>entities.Album</class>
@@ -16,11 +16,11 @@
 		<properties>
 		<!--  make connection to db  -->
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/notepadDB" />
-			<property name="javax.persistence.jdbc.user" value="student" />
-			<property name="javax.persistence.jdbc.password" value="student" />
+			<property name="javax.persistence.jdbc.user" value="notepad" />
+			<property name="javax.persistence.jdbc.password" value="DYWs8o" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-			<property name="hibernate.show_sql" value="true" />
-			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.format_sql" value="false" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 			<property name="hibernate.connection.provider_class"
 				value="org.hibernate.connection.C3P0ConnectionProvider" />

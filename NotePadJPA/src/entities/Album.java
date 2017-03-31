@@ -1,17 +1,18 @@
 package entities;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Album {
@@ -20,16 +21,16 @@ public class Album {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String title;
+	@Temporal(TemporalType.DATE)
 	@Column(name = "release_year")
-	private LocalDate releaseYear;
+	private Date releaseYear;
 	private String picture;
 	@OneToMany(mappedBy = "album")
 	private List<Song> songs;
+
 	@ManyToMany(mappedBy = "albums")
-	private List<Album> albums;
-	@ManyToMany(mappedBy = "albums")
-	@Enumerated(EnumType.STRING)
-	private List<Category> genres;
+//	@Enumerated(EnumType.STRING)
+	private List<Genre> genres;
 	
 	public String getTitle() {
 		return title;
@@ -39,11 +40,11 @@ public class Album {
 		this.title = title;
 	}
 
-	public LocalDate getReleaseYear() {
+	public Date getReleaseYear() {
 		return releaseYear;
 	}
 
-	public void setReleaseYear(LocalDate releaseYear) {
+	public void setReleaseYear(Date releaseYear) {
 		this.releaseYear = releaseYear;
 	}
 
@@ -68,13 +69,6 @@ public class Album {
 	}
 	
 
-	public List<Album> getAlbums() {
-		return albums;
-	}
-
-	public void setAlbums(List<Album> albums) {
-		this.albums = albums;
-	}
 
 	@Override
 	public String toString() {
