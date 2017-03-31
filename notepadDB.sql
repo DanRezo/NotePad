@@ -52,7 +52,7 @@ DROP TABLE IF EXISTS `album` ;
 CREATE TABLE IF NOT EXISTS `album` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(45) NOT NULL,
-  `release_year` VARCHAR(45) NULL,
+  `release_year` INT NULL,
   `picture` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -387,4 +387,3 @@ INSERT INTO `genre_album` (`genre_id`, `album_id`) VALUES (4, 7);
 INSERT INTO `genre_album` (`genre_id`, `album_id`) VALUES (5, 8);
 
 COMMIT;
-
