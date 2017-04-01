@@ -32,7 +32,9 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private AdminLevel adminLevel;
 	@ManyToMany
-	@JoinTable(name = "playlist_user", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "playlist_id"))
+	@JoinTable(name = "playlist_user", 
+	joinColumns = @JoinColumn(name = "user_id"), 
+	inverseJoinColumns = @JoinColumn(name = "playlist_id"))
 	private List<Playlist> playlists;
 	@OneToMany(mappedBy = "owner")
 	private List<Playlist> ownedPlaylists;

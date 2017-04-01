@@ -31,6 +31,11 @@ public class PlaylistTest {
 	}
 	
 	@Test
+	public void test_playlist_owner_association() {
+		assertEquals("gmurricane", playlist.getOwner().getAlias());
+	}
+	
+	@Test
 	public void test_playlist_song_association() {
 		assertEquals(10, playlist.getSongs().size());
 	}

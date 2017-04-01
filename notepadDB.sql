@@ -233,9 +233,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `NotePadDB`;
-INSERT INTO `playlist` (`id`, `title`, `owner_id`) VALUES (1, 'My First Playlist', DEFAULT);
-INSERT INTO `playlist` (`id`, `title`, `owner_id`) VALUES (2, 'Work Out Jams', DEFAULT);
-INSERT INTO `playlist` (`id`, `title`, `owner_id`) VALUES (3, 'Bedroom Jams', DEFAULT);
+INSERT INTO `playlist` (`id`, `title`, `owner_id`) VALUES (1, 'My First Playlist', 1);
+INSERT INTO `playlist` (`id`, `title`, `owner_id`) VALUES (2, 'Work Out Jams', 2);
+INSERT INTO `playlist` (`id`, `title`, `owner_id`) VALUES (3, 'Bedroom Jams', 1);
 
 COMMIT;
 

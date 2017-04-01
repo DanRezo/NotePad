@@ -31,6 +31,11 @@ public class UserTest {
 	}
 	
 	@Test
+	public void test_user_owner_association() {
+		assertEquals(2, user.getOwnedPlaylists().size());
+	}
+	
+	@Test
 	public void test_user_playlist_association() {
 		assertEquals(3, user.getPlaylists().size());
 	}
