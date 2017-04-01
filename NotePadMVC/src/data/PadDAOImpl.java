@@ -45,15 +45,19 @@ public class PadDAOImpl  implements PadDAO{
 	}
 	
 	public Album edit(int id, Album album){
-		Album alb = em.find(Album.class, 1);
+		Album alb = em.find(Album.class, id);
 		
-		alb.set
-		Return
+		alb.setTitle(album.getTitle());
+		alb.setGenres(album.getGenres());
+		alb.setSongs(album.getSongs());
+		alb.setReleaseYear(album.getReleaseYear());
+		
+		return alb;
 	}
 
 	
 	public Song edit(int id, Song song){
-		Song s = em.find(Song.class, 1);
+		Song s = em.find(Song.class, id);
 		
 		s.setAlbum(song.getAlbum());
 		s.setTitle(song.getTitle());
@@ -71,35 +75,28 @@ public class PadDAOImpl  implements PadDAO{
 	
 	@Override
 	public List <Song> getSongsByArtist(int id) {
-		String queryString ="SELECT a FROM Artist a JOIN FETCH a.albums.songs WHERE a.id = :id";
-		Artist artist = em.createQuery(queryString, Artist.class).setParameter("id", id).getSingleResult();
-		return artist.getSongs();
+		String queryString ="SELECT a.song FROM Artist WHERE a.id = :id";
+		List <Song> songs = em.createQuery(queryString, Song.class).setParameter("id", id).getResultList();
+		return songs;
 	}
 	
 	@Override
 	public List <Song> getSongsByGenre(int id) {
-		String queryString ="SELECT a FROM Artist a JOIN FETCH a.albums.songs WHERE a.id = :id";
-		Artist artist = em.createQuery(queryString, Artist.class).setParameter("id", id).getSingleResult();
-		return artist.getSongs();
+		String queryString ="SELECT a.song FROM Album a WHERE a.gerne_id = :id";
+		List<Song> songs = em.createQuery(queryString, Song.class).setParameter("id", id).getResultList();
+		return songs;
 	}
 	
-	@Override
-	public List <Song> getSongsByGenre(int id){
-		String queryString = "Select g From  a JOIN FETCH a.";
-		Genre genre = em.createQuery(queryString, Genre.class).setParameter("id",id).getSingleResult();
-		return genre.setSongs;
-	}
-	
-	public List <Artist> getAlbumsByArtist(int id) {
-		String queryString = "";
+	public List <Album> getAlbumsByArtist(int id) {
+		String queryString = "Select a From Artist a JOIN FETCH a.albums where a.id = :id ";
 		Artist artist = em.createQuery(queryString, Artist.class).setParameter("id", id).getSingleResult();
 		return artist.getAlbums();	
 		}
 	
-	public List <Artist> getAlbumsByGenre(int id) {
-		String queryString = "Select ";
-		Artist artist = em.createQuery(queryString, Artist.class).setParameter("id", id).getSingleResult();
-		return artist.getAlbums();	
+	public List <Album> getAlbumsByGenre(int id) {
+		String queryString = "Select s FROM Album a JOIN FETCH a.genre where a.id = :id";
+		Genre genre = em.createQuery(queryString, Genre.class).setParameter("id", id).getSingleResult();
+		return genre.getAlbums();	
 		}
 	
 	public List<Playlist> showPlaylistByUser(int id){

@@ -28,7 +28,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` VARCHAR(45) NOT NULL,
   `profile_picture` VARCHAR(45) NULL,
   `admin_level` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `alias_UNIQUE` (`alias` ASC))
 ENGINE = InnoDB;
 
 
