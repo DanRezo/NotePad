@@ -1,5 +1,5 @@
 package data;
 
-public class PadDAPImpl {
+public class PadDAPImpl  implements PadDAO{
 
 }
