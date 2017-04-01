@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import entities.Artist;
+import entities.Category;
 
 public class ArtistTest {
 	private EntityManagerFactory emf = null;
@@ -41,7 +42,17 @@ public class ArtistTest {
 	}
 	@Test
 	public void test_Artist_Genre(){
-		assertEquals("HIP_HOP", artist.getAlbums().get(0).g)
+		assertEquals(Category.HIP_HOP, artist.getAlbums().get(0).getGenres().get(0).getGenre());
 	}
 	
+	@Test 
+	public void test_Artist_in_Playlist(){
+		assertEquals(2, artist.getAlbums().get(0).getSongs().get(0).getPlaylists().size());
+		
+	}
+	
+	@ Test
+	public void test_Artist_Songs(){
+		assertEquals(4, artist.getAlbums().get(0).getSongs().size());
+	}
 }
