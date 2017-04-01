@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -31,10 +32,10 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private AdminLevel adminLevel;
 	@ManyToMany
-	@JoinTable(name = "playlist_user", 
-	joinColumns = @JoinColumn(name = "user_id"), 
-	inverseJoinColumns = @JoinColumn(name = "playlist_id"))
+	@JoinTable(name = "playlist_user", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "playlist_id"))
 	private List<Playlist> playlists;
+	@OneToMany(mappedBy = "owner")
+	private List<Playlist> ownedPlaylists;
 
 	public String getAlias() {
 		return alias;
@@ -94,6 +95,14 @@ public class User {
 
 	public int getId() {
 		return id;
+	}
+
+	public List<Playlist> getOwnedPlaylists() {
+		return ownedPlaylists;
+	}
+
+	public void setOwnedPlaylists(List<Playlist> ownedPlaylists) {
+		this.ownedPlaylists = ownedPlaylists;
 	}
 
 	@Override

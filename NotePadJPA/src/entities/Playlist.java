@@ -6,7 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Playlist {
@@ -19,6 +21,9 @@ public class Playlist {
 	private List<User> users;
 	@ManyToMany(mappedBy = "playlists")
 	private List<Song> songs;
+	@ManyToOne
+	@JoinColumn(name = "owner_id")
+	private User owner;
 
 	public String getTitle() {
 		return title;
@@ -46,6 +51,14 @@ public class Playlist {
 
 	public int getId() {
 		return id;
+	}
+
+	public User getOwner() {
+		return owner;
+	}
+
+	public void setOwner(User owner) {
+		this.owner = owner;
 	}
 
 	@Override

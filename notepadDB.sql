@@ -40,7 +40,14 @@ DROP TABLE IF EXISTS `playlist` ;
 CREATE TABLE IF NOT EXISTS `playlist` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`))
+  `owner_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_playlist_user1_idx` (`owner_id` ASC),
+  CONSTRAINT `fk_playlist_user1`
+    FOREIGN KEY (`owner_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -52,7 +59,7 @@ DROP TABLE IF EXISTS `album` ;
 CREATE TABLE IF NOT EXISTS `album` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(45) NOT NULL,
-  `release_year` INT NULL,
+  `release_year` VARCHAR(45) NULL,
   `picture` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -226,9 +233,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `NotePadDB`;
-INSERT INTO `playlist` (`id`, `title`) VALUES (1, 'My First Playlist');
-INSERT INTO `playlist` (`id`, `title`) VALUES (2, 'Work Out Jams');
-INSERT INTO `playlist` (`id`, `title`) VALUES (3, 'Bedroom Jams');
+INSERT INTO `playlist` (`id`, `title`, `owner_id`) VALUES (1, 'My First Playlist', DEFAULT);
+INSERT INTO `playlist` (`id`, `title`, `owner_id`) VALUES (2, 'Work Out Jams', DEFAULT);
+INSERT INTO `playlist` (`id`, `title`, `owner_id`) VALUES (3, 'Bedroom Jams', DEFAULT);
 
 COMMIT;
 
@@ -387,3 +394,4 @@ INSERT INTO `genre_album` (`genre_id`, `album_id`) VALUES (4, 7);
 INSERT INTO `genre_album` (`genre_id`, `album_id`) VALUES (5, 8);
 
 COMMIT;
+
