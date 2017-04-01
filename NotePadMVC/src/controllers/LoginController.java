@@ -31,6 +31,7 @@ public class LoginController {
 			model.addAttribute("user", user);
 			return "pad";
 		} else {
+			model.addAttribute("user", userAttemptedLogin);
 			model.addAttribute("userNotFound", true);
 			return "login";
 		}

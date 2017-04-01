@@ -1,6 +1,7 @@
 package data;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
@@ -26,29 +27,35 @@ public class LoginDAOImpl implements LoginDAO{
 		
 		String query = "SELECT u FROM User AS u WHERE u.alias = :alias";
 		
-		User aliasExists = em.createQuery(query, User.class).setParameter(
-				"alias", user.getAlias()).getSingleResult();
-		
-		if (aliasExists == null) {
-			em.getTransaction().begin();
+		try {
+			
+			em.createQuery(query, User.class).setParameter(
+					"alias", user.getAlias()).getSingleResult();
+			return null;
+			
+		} catch (NoResultException e) {
+
 			em.persist(user);
 			em.flush();
-			em.getTransaction().commit();
 			return user;
-		}	else {
-			return null;
+			
 		}
 	}
 
 	@Override
 	public User getUserByAliasAndPassword(String alias, String password) {
 		
-		String query = "SELECT u FROM User AS u WHERE"
-				+ " u.password = :password AND u.alias = :alias";
-		User user = em.createQuery(query, User.class).setParameter("password", password)
-				.setParameter("alias", alias).getSingleResult();
-		
-		return user;
+		try {
+			String query = "SELECT u FROM User AS u WHERE"
+					+ " u.password = :password AND u.alias = :alias";
+			User user = em.createQuery(query, User.class).setParameter("password", password)
+					.setParameter("alias", alias).getSingleResult();
+			
+			return user;
+		} catch (NoResultException e) {
+
+			return null;
+		}
 	}
 
 }
