@@ -42,7 +42,8 @@ public class AlbumTest {
 	
 	@Test
 	public void test_Album_Genre(){
-		assertEquals();
+		assertEquals("ROCK", album.getGenres().toString());
 	}
+	
 	
 }
