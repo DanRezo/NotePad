@@ -10,6 +10,11 @@
 	<context:component-scan base-package="controllers" />
 
 	<bean id="noteDao" class="data.NoteDAOImpl" />
+	<bean id="loginDAO" class="data.LoginDAOImpl" />
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="suffix" value=".jsp" />
+	</bean>
 	
 
 	<bean id="myEntityManagerFactory"
