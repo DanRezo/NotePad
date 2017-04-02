@@ -22,16 +22,17 @@ public class PadDAOImpl  implements PadDAO{
 	@PersistenceContext
 	private EntityManager em;
 
-	
+//Create	
 	@Override
-	public Artist create(Artist artist){
+	public Artist createNewArtist(Artist artist){
 		em.persist(artist);
 		em.flush();
 		return artist;
 	}
 	
 	@Override
-	public Album create(Album album){		
+	public Album create(Album album){
+		
 		em.persist(album);
 		em.flush();
 		return album;
@@ -43,7 +44,7 @@ public class PadDAOImpl  implements PadDAO{
 	em.flush();
 	return song;
 	}
-	
+//Update
 	public Album edit(int id, Album album){
 		Album alb = em.find(Album.class, id);
 		
@@ -55,7 +56,6 @@ public class PadDAOImpl  implements PadDAO{
 		return alb;
 	}
 
-	
 	public Song edit(int id, Song song){
 		Song s = em.find(Song.class, id);
 		
@@ -65,13 +65,20 @@ public class PadDAOImpl  implements PadDAO{
 		
 		}
 	
+	public Artist edit(int id, Artist artist){
+		Artist a = em.find(Artist.class, id);
+		
+		a.setName(artist.getName());
+		a.setPicture(artist.getPicture());
+		return a;
+	}
+//Read
 	@Override
 	public List <Song> getSongsByAlbum(int id) {
 		String queryString ="SELECT a FROM Album a JOIN FETCH a.songs where a.id = :id";
 		Album album = em.createQuery(queryString, Album.class).setParameter("id", id).getSingleResult();
 		return album.getSongs();
 	}
-	
 	
 	@Override
 	public List <Song> getSongsByArtist(int id) {
@@ -105,6 +112,8 @@ public class PadDAOImpl  implements PadDAO{
 		return user.getPlaylists();
 		
 	}
+	
+//	Delete
 	
 }
 

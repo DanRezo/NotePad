@@ -9,11 +9,12 @@ import entities.Song;
 
 public interface PadDAO {
 
-	public Artist create(Artist artist);
+	public Artist createNewArtist(Artist artist);
 	public Album create(Album album);
 	public Song create(Song song);
 	public Album edit(int id, Album album);
 	public Song edit(int id, Song song);
+	public Artist edit(int id, Artist artist);
 	public List <Song> getSongsByAlbum(int id);
 	public List <Song> getSongsByArtist(int id);
 	public List <Song> getSongsByGenre(int id);
