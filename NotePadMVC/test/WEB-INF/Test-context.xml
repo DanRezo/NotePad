@@ -12,6 +12,8 @@
 	<context:component-scan base-package="controllers" />
 
 	 <bean id="NoteDao" class="data.NoteDAOImpl" /> 
+	 <bean id="padDAO" class="data.PadDAOImpl"/>
+	 <bean id="loginDAO" class="data.LoginDAOImpl"/>
 
 	<bean id="myEntityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
