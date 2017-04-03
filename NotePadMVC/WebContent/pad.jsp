@@ -8,5 +8,6 @@
 </head>
 <body>
 Pad page
+<a href="test.do">test</a>
 </body>
 </html>
