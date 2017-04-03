@@ -116,6 +116,25 @@ public class PadDAOImpl  implements PadDAO{
 		return user.getPlaylists();
 		
 	}
+
+
+	@Override
+	public Artist showArtist(int id) {
+		
+		return em.find(Artist.class, id);
+	}
+
+	@Override
+	public Album showAlbum(int id) {
+		
+		return em.find(Album.class, id);
+	}
+
+	@Override
+	public Song showSong(int id) {
+
+		return em.find(Song.class, id);
+	}
 	
 //	Delete
 	
