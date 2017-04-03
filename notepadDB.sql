@@ -28,8 +28,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` VARCHAR(45) NOT NULL,
   `profile_picture` VARCHAR(45) NULL,
   `admin_level` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `alias_UNIQUE` (`alias` ASC))
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
@@ -42,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `playlist` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(45) NOT NULL,
   `owner_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`id`, `owner_id`),
   INDEX `fk_playlist_user1_idx` (`owner_id` ASC),
   CONSTRAINT `fk_playlist_user1`
     FOREIGN KEY (`owner_id`)
