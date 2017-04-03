@@ -45,8 +45,10 @@ pageEncoding="UTF-8"%>
 </c:otherwise>
 </c:choose>
 <br>
+<div class="signIn">
 <h3>No account?</h3>
 <a href="signup.jsp" class="btn btn-info btn-lg" role="button">Sign Up</a>
+</div>
 </div>
 </div>
 </div>
