@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Pad</title>
+<title>Insert title here</title>
 </head>
 <body>
-Pad page
-<a href="test.do">test</a>
+<a href="test2.do">test</a>
+
 </body>
 </html>
