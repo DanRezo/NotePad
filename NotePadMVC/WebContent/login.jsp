@@ -13,7 +13,7 @@ pageEncoding="UTF-8"%>
 <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="npstyle.css"></head>
 <body>
-<div class="container-fluid">
+<div class="container">
 <div class="page-header">
 <h1 class="notePadHeader">Welcome to NotePad</h1>
 </div>
