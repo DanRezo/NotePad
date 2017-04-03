@@ -93,8 +93,12 @@ public class PadDAOImpl  implements PadDAO{
 	
 	@Override
 	public List <Song> getSongsByGenre(int id) {
-		String queryString ="SELECT g.album FROM Genre g WHERE g.id = :id";
-		List<Song> songs = em.createQuery(queryString, Song.class).setParameter("id", id).getResultList();
+		String queryString ="SELECT g FROM Genre g WHERE g.id = :id";
+		Genre genre = em.createQuery(queryString, Genre.class).setParameter("id", id).getSingleResult();
+		List<Song> songs = new ArrayList<Song>();
+		for (Album a : genre.getAlbums()) {
+			songs.addAll(a.getSongs());
+		}
 		return songs;
 	}
 	

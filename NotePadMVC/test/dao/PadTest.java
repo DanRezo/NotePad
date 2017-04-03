@@ -48,37 +48,37 @@ public class PadTest {
 	  }
 	  
 	 // Testing Create
-	  @Test
-	  public void test_creatNewArtist(){
-		   Artist a = new Artist();
-		   
-		   a.setName("DReezy");
-		   a.setAlbums("Lost");
-	  }
-	  
-	  @Test
-	  public void test_creatNewAlbum(){
-		  
-		  Album Lost = new Album();
-		  
-		  Lost.setTitle("Lost");
-		  Lost.setReleaseYear(2017);
-		  Lost.set
-	  }
-	  
-	  @Test
-	  public void test_creatNewSong(){
-		  
-		  Song s = new Song();
-		  
-		assertEquals(s.setTitle("Wonderer"));
-		  s.setTitle("Up");
-		  s.setTitle("Friends");
-		  s.setTitle("Script");
-		  
-		  s.setAlbum("Lost");
-		  
-	  }
+//	  @Test
+//	  public void test_creatNewArtist(){
+//		   Artist a = new Artist();
+//		   
+//		   a.setName("DReezy");
+//		   a.setAlbums("Lost");
+//	  }
+//	  
+//	  @Test
+//	  public void test_creatNewAlbum(){
+//		  
+//		  Album Lost = new Album();
+//		  
+//		  Lost.setTitle("Lost");
+//		  Lost.setReleaseYear(2017);
+//		  Lost.set
+//	  }
+//	  
+//	  @Test
+//	  public void test_creatNewSong(){
+//		  
+//		  Song s = new Song();
+//		  
+//		assertEquals(s.setTitle("Wonderer"));
+//		  s.setTitle("Up");
+//		  s.setTitle("Friends");
+//		  s.setTitle("Script");
+//		  
+//		  s.setAlbum("Lost");
+//		  
+//	  }
 	  
 	 // Testing Read
 	  @Test
@@ -93,7 +93,7 @@ public class PadTest {
 	  
 	  @Test
 	  public void test_get_songs_by_Genre(){
-		  assertEquals("", dao.getSongsByGenre(3).size());
+		  assertEquals(4, dao.getSongsByGenre(3).size());
 	  }
 	  
 	  @Test
