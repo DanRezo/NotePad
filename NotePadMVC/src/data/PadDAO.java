@@ -23,4 +23,8 @@ public interface PadDAO {
 	public List <Album> getAlbumsByGenre(int id);
 	public List<Playlist> showPlaylistByUser(int id);
 	public Album getAlbumById(int i);
+	public Artist showArtist(int id);
+	public Album showAlbum(int id);
+	public Song showSong(int id);
+
 }
