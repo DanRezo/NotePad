@@ -1,0 +1,23 @@
+.loginForm {
+	text-align:center;
+}
+
+.input {
+	margin-bottom: 3px;
+}
+
+.notePadHeader {
+	font-family: 'Gloria Hallelujah', cursive;
+	color: white;
+}
+
+body {
+	background-image: url("photos/notepadBGphoto.jpg");
+	background-size: 100%;
+}
+
+.jumbotron {
+   background: rgb(200, 54, 54); /* This is for ie8 and below */
+   background: rgba(200, 54, 54, 0.5);
+	 
+}
