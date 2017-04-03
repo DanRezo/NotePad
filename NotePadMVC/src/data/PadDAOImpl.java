@@ -40,11 +40,19 @@ public class PadDAOImpl  implements PadDAO{
 	}
 	
 	@Override
-	public Song create(Song song){
+	public Song createNewSongWithNewAlbum(Song song, Album album){
 	em.persist(song);
 	em.flush();
 	return song;
 	}
+	
+	public Song createNewSongWithExistingAlbum(Song song, Album album){
+		em.persist(song);
+		em.flush();
+		return song;
+	}
+	
+	
 //Update
 	public Album edit(int id, Album album){
 		Album alb = em.find(Album.class, id);

@@ -2,6 +2,9 @@ package dao;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -47,14 +50,20 @@ public class PadTest {
 	    wac = null;
 	  }
 	  
-	 // Testing Create
-//	  @Test
-//	  public void test_creatNewArtist(){
-//		   Artist a = new Artist();
-//		   
-//		   a.setName("DReezy");
-//		   a.setAlbums("Lost");
-//	  }
+// Testing Create
+	  @Test
+	  public void test_creatNewArtist(){
+		   Artist a = new Artist();
+		   Album bum = new Album();
+		   List<Album> albums = new ArrayList<>();
+		   
+		   bum.setTitle("What UP");
+		   albums.add(bum);
+		   dao.createNewArtist(a);
+		   a.setName("D-Reezy");
+		   a.setAlbums(albums);
+		   
+	  }
 //	  
 //	  @Test
 //	  public void test_creatNewAlbum(){
@@ -80,7 +89,7 @@ public class PadTest {
 //		  
 //	  }
 	  
-	 // Testing Read
+// Testing Read
 	  @Test
 	  public void test_get_songs_by_Artist(){
 		  assertEquals(7, dao.getSongsByArtist(1).size());
@@ -106,14 +115,42 @@ public class PadTest {
 		  assertEquals(2, dao.getAlbumsByArtist(1).size());
 	  }
 	  
-	  // Testing Update
 	  
+// Testing Update
 	  @Test
-	  public void edit_song(){
-		 
-		  
+	  public void test_edit_Song(){
+       	  Song s = em.find(Song.class, 1);
+       	  
+       	  s.getAlbum();
+       	  s.setTitle("Loser");
+       	  s.setTitle(s.getTitle());
+       	  
+       	  assertEquals("Loser", s.getTitle());
+       	  
+       	  
 	  }
 	  
+	  @Test
+	  public void test_edit_Album(){
+		  Album a = em.find(Album.class, 1);
+		  
+		  a.setTitle("RayBandShades");
+		  a.setTitle(a.getTitle());
+		  
+		  assertEquals("RayBandShades", a.getTitle());
+	  }
+	  
+	  @Test
+	  public void test_edit_Artist(){
+		  Artist art = em.find(Artist.class, 1);
+		  
+		  art.setName("Lincoln Parkers");
+		  art.setName(art.getName());
+		  
+		  
+		  assertEquals("Lincoln Parkers", art.getName());
+		  
+	  }
 	  
 	  // Testing Delete
 	  
