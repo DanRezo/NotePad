@@ -26,13 +26,14 @@ public class PadDAOImpl  implements PadDAO{
 //Create	
 	@Override
 	public Artist createNewArtist(Artist artist){
+		if(artist.getName() != artist.getName()){
 		em.persist(artist);
 		em.flush();
+		}
 		return artist;
 	}
-	
 	@Override
-	public Album create(Album album){
+	public Album createNewAlbum(Album album){
 		
 		em.persist(album);
 		em.flush();
@@ -40,11 +41,20 @@ public class PadDAOImpl  implements PadDAO{
 	}
 	
 	@Override
-	public Song create(Song song){
-	em.persist(song);
+	public Song createNewSongWithNewAlbum(Song song, Album album){
+	System.out.println(song);
+		em.persist(song);
 	em.flush();
 	return song;
 	}
+	
+	public Song createNewSongWithExistingAlbum(Song song, Album album){
+		em.persist(song);
+		em.flush();
+		return song;
+	}
+	
+	
 //Update
 	public Album edit(int id, Album album){
 		Album alb = em.find(Album.class, id);
@@ -93,8 +103,12 @@ public class PadDAOImpl  implements PadDAO{
 	
 	@Override
 	public List <Song> getSongsByGenre(int id) {
-		String queryString ="SELECT g.album FROM Genre g WHERE g.id = :id";
-		List<Song> songs = em.createQuery(queryString, Song.class).setParameter("id", id).getResultList();
+		String queryString ="SELECT g FROM Genre g WHERE g.id = :id";
+		Genre genre = em.createQuery(queryString, Genre.class).setParameter("id", id).getSingleResult();
+		List<Song> songs = new ArrayList<Song>();
+		for (Album a : genre.getAlbums()) {
+			songs.addAll(a.getSongs());
+		}
 		return songs;
 	}
 	
@@ -115,6 +129,10 @@ public class PadDAOImpl  implements PadDAO{
 		User user = em.createQuery(queryString, User.class).setParameter("id", id).getSingleResult();
 		return user.getPlaylists();
 		
+	}
+	@Override
+	public Album getAlbumById(int id) {
+		return em.find(Album.class, id);
 	}
 
 

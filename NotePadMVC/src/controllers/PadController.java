@@ -1,8 +1,5 @@
 package controllers;
 
-import java.util.List;
-import data.PadDAO;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,13 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
-import entities.Album;
-import entities.Artist;
-import entities.Playlist;
-import entities.Song;
 import data.NoteDAO;
 import data.PadDAO;
+import entities.Album;
+import entities.Artist;
+import entities.Song;
 import entities.User;
 
 @Controller
@@ -39,11 +36,11 @@ public class PadController{
 	}
 
 	@RequestMapping(path = "createAlbum.do", method = RequestMethod.GET)
-	public String createAlbum(Album album){
-		album = padDAO.create(album);
+	public String createNewAlbum(Album album){
+		album = padDAO.createNewAlbum(album);
 		mv.addObject("album", album);
 		return "album";
-
+	}
 
 	@RequestMapping(value="retrievePlaylist.do", params = "id", method = RequestMethod.GET)
 	public String test(@ModelAttribute("user") User user, @RequestParam("id") int id, Model model){
@@ -53,12 +50,12 @@ public class PadController{
 		return "playlist";
 	}
 
-	@RequestMapping(path = "createSong.do", method = RequestMethod.GET)
-		public String createSong(Song song){
-		song = padDAO.create(song);
-		mv.addObject("song", song);
-		return "song";
-	}
+//	@RequestMapping(path = "createSong.do", method = RequestMethod.GET)
+//		public String createSong(Song song){
+//		song = padDAO.create(song);
+//		mv.addObject("song", song);
+//		return "song";
+//	}
 
 	@RequestMapping(path = "editSong.do", method = RequestMethod.GET)
 		public String editSong(int id, Song song){

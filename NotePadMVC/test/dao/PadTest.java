@@ -2,6 +2,9 @@ package dao;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -47,40 +50,57 @@ public class PadTest {
 	    wac = null;
 	  }
 	  
-	 // Testing Create
+ // Testing Create
 	  @Test
 	  public void test_creatNewArtist(){
 		   Artist a = new Artist();
+		   Album album = new Album();
+		   List<Album> albums = new ArrayList<>();
 		   
-		   a.setName("DReezy");
-		   a.setAlbums("Lost");
+		   album.setTitle("What UP");
+		   albums.add(album);
+		   a.setName("D-Reezy");
+		   a.setAlbums(albums);
+		   
+		   Artist p = dao.createNewArtist(a);
+
+		   assertEquals("D-Reezy",p.getName());
+		   assertEquals("What UP",p.getAlbums().get(0).getTitle());
 	  }
 	  
 	  @Test
 	  public void test_creatNewAlbum(){
-		  
 		  Album Lost = new Album();
+		  List<Album> albums = new ArrayList<Album>();
 		  
 		  Lost.setTitle("Lost");
 		  Lost.setReleaseYear(2017);
-		  Lost.set
+		  albums.add(Lost);
+		  
+		  Album a = dao.createNewAlbum(Lost);
+		  
+		  assertEquals("Lost",a.getTitle());
+		  assertEquals(2017 , a.getReleaseYear());
+		 
 	  }
 	  
 	  @Test
-	  public void test_creatNewSong(){
-		  
+	  public void test_create_New_Song_with_Album(){
 		  Song s = new Song();
 		  
-		assertEquals(s.setTitle("Wonderer"));
-		  s.setTitle("Up");
-		  s.setTitle("Friends");
-		  s.setTitle("Script");
 		  
-		  s.setAlbum("Lost");
+		  s.setTitle("Up");
+		  Album a = dao.getAlbumById(1);
+		  s.setAlbum(a);
+		  
+		  System.out.println(s);
+		  Song al = dao.createNewSongWithNewAlbum(s, a);
+		  
+		  assertEquals("Up",al.getTitle());
 		  
 	  }
 	  
-	 // Testing Read
+// Testing Read
 	  @Test
 	  public void test_get_songs_by_Artist(){
 		  assertEquals(7, dao.getSongsByArtist(1).size());
@@ -93,7 +113,7 @@ public class PadTest {
 	  
 	  @Test
 	  public void test_get_songs_by_Genre(){
-		  assertEquals("", dao.getSongsByGenre(3).size());
+		  assertEquals(4, dao.getSongsByGenre(3).size());
 	  }
 	  
 	  @Test
@@ -106,16 +126,40 @@ public class PadTest {
 		  assertEquals(2, dao.getAlbumsByArtist(1).size());
 	  }
 	  
-	  // Testing Update
 	  
+// Testing Update
 	  @Test
-	  public void edit_song(){
-		 
+	  public void test_edit_Song(){
+       	  Song s = em.find(Song.class, 1);
+       	  
+       	  s.getAlbum();
+       	  s.setTitle("Loser");
+       	  s.setTitle(s.getTitle());
+       	  
+       	  assertEquals("Loser", s.getTitle());
+	  }
+	  @Test
+	  public void test_edit_Album(){
+		  Album a = em.find(Album.class, 1);
+		  
+		  a.setTitle("RayBandShades");
+		  a.setTitle(a.getTitle());
+		  
+		  assertEquals("RayBandShades", a.getTitle());
+	  }
+	  @Test
+	  public void test_edit_Artist(){
+		  Artist art = em.find(Artist.class, 1);
+		  
+		  art.setName("Lincoln Parkers");
+		  art.setName(art.getName());
+		  
+		  
+		  assertEquals("Lincoln Parkers", art.getName());
 		  
 	  }
 	  
-	  
-	  // Testing Delete
+// Testing Delete
 	  
 		
 }
