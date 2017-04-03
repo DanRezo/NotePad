@@ -1,5 +1,6 @@
 package data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -74,22 +75,25 @@ public class PadDAOImpl  implements PadDAO{
 	}
 //Read
 	@Override
+	
 	public List <Song> getSongsByAlbum(int id) {
-		String queryString ="SELECT a FROM Album a JOIN FETCH a.songs where a.id = :id";
-		Album album = em.createQuery(queryString, Album.class).setParameter("id", id).getSingleResult();
-		return album.getSongs();
+		return em.find(Album.class, id).getSongs();
 	}
 	
 	@Override
 	public List <Song> getSongsByArtist(int id) {
-		String queryString ="SELECT a.song FROM Artist WHERE a.id = :id";
-		List <Song> songs = em.createQuery(queryString, Song.class).setParameter("id", id).getResultList();
+		String queryString ="SELECT a FROM Artist a WHERE a.id = :id";
+		Artist artist = em.createQuery(queryString, Artist.class).setParameter("id", id).getSingleResult();
+		List<Song> songs = new ArrayList<Song>();
+		for (Album a : artist.getAlbums()) {
+			songs.addAll(a.getSongs());
+		}
 		return songs;
 	}
 	
 	@Override
 	public List <Song> getSongsByGenre(int id) {
-		String queryString ="SELECT a.song FROM Album a WHERE a.gerne_id = :id";
+		String queryString ="SELECT g.album FROM Genre g WHERE g.id = :id";
 		List<Song> songs = em.createQuery(queryString, Song.class).setParameter("id", id).getResultList();
 		return songs;
 	}
@@ -101,7 +105,7 @@ public class PadDAOImpl  implements PadDAO{
 		}
 	
 	public List <Album> getAlbumsByGenre(int id) {
-		String queryString = "Select s FROM Album a JOIN FETCH a.genre where a.id = :id";
+		String queryString = "Select g FROM Genre g JOIN FETCH g.albums where g.id = :id";
 		Genre genre = em.createQuery(queryString, Genre.class).setParameter("id", id).getSingleResult();
 		return genre.getAlbums();	
 		}
@@ -114,6 +118,8 @@ public class PadDAOImpl  implements PadDAO{
 	}
 	
 //	Delete
+	
+
 	
 }
 
