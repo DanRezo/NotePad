@@ -26,13 +26,14 @@ public class PadDAOImpl  implements PadDAO{
 //Create	
 	@Override
 	public Artist createNewArtist(Artist artist){
+		if(artist.getName() != artist.getName()){
 		em.persist(artist);
 		em.flush();
+		}
 		return artist;
 	}
-	
 	@Override
-	public Album create(Album album){
+	public Album createNewAlbum(Album album){
 		
 		em.persist(album);
 		em.flush();
@@ -41,7 +42,8 @@ public class PadDAOImpl  implements PadDAO{
 	
 	@Override
 	public Song createNewSongWithNewAlbum(Song song, Album album){
-	em.persist(song);
+	System.out.println(song);
+		em.persist(song);
 	em.flush();
 	return song;
 	}
@@ -127,6 +129,10 @@ public class PadDAOImpl  implements PadDAO{
 		User user = em.createQuery(queryString, User.class).setParameter("id", id).getSingleResult();
 		return user.getPlaylists();
 		
+	}
+	@Override
+	public Album getAlbumById(int id) {
+		return em.find(Album.class, id);
 	}
 	
 //	Delete

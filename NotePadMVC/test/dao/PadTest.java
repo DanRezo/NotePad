@@ -50,44 +50,55 @@ public class PadTest {
 	    wac = null;
 	  }
 	  
-// Testing Create
+ // Testing Create
 	  @Test
 	  public void test_creatNewArtist(){
 		   Artist a = new Artist();
-		   Album bum = new Album();
+		   Album album = new Album();
 		   List<Album> albums = new ArrayList<>();
 		   
-		   bum.setTitle("What UP");
-		   albums.add(bum);
-		   dao.createNewArtist(a);
+		   album.setTitle("What UP");
+		   albums.add(album);
 		   a.setName("D-Reezy");
 		   a.setAlbums(albums);
 		   
+		   Artist p = dao.createNewArtist(a);
+
+		   assertEquals("D-Reezy",p.getName());
+		   assertEquals("What UP",p.getAlbums().get(0).getTitle());
 	  }
-//	  
-//	  @Test
-//	  public void test_creatNewAlbum(){
-//		  
-//		  Album Lost = new Album();
-//		  
-//		  Lost.setTitle("Lost");
-//		  Lost.setReleaseYear(2017);
-//		  Lost.set
-//	  }
-//	  
-//	  @Test
-//	  public void test_creatNewSong(){
-//		  
-//		  Song s = new Song();
-//		  
-//		assertEquals(s.setTitle("Wonderer"));
-//		  s.setTitle("Up");
-//		  s.setTitle("Friends");
-//		  s.setTitle("Script");
-//		  
-//		  s.setAlbum("Lost");
-//		  
-//	  }
+	  
+	  @Test
+	  public void test_creatNewAlbum(){
+		  Album Lost = new Album();
+		  List<Album> albums = new ArrayList<Album>();
+		  
+		  Lost.setTitle("Lost");
+		  Lost.setReleaseYear(2017);
+		  albums.add(Lost);
+		  
+		  Album a = dao.createNewAlbum(Lost);
+		  
+		  assertEquals("Lost",a.getTitle());
+		  assertEquals(2017 , a.getReleaseYear());
+		 
+	  }
+	  
+	  @Test
+	  public void test_create_New_Song_with_Album(){
+		  Song s = new Song();
+		  
+		  
+		  s.setTitle("Up");
+		  Album a = dao.getAlbumById(1);
+		  s.setAlbum(a);
+		  
+		  System.out.println(s);
+		  Song al = dao.createNewSongWithNewAlbum(s, a);
+		  
+		  assertEquals("Up",al.getTitle());
+		  
+	  }
 	  
 // Testing Read
 	  @Test
@@ -126,10 +137,7 @@ public class PadTest {
        	  s.setTitle(s.getTitle());
        	  
        	  assertEquals("Loser", s.getTitle());
-       	  
-       	  
 	  }
-	  
 	  @Test
 	  public void test_edit_Album(){
 		  Album a = em.find(Album.class, 1);
@@ -139,7 +147,6 @@ public class PadTest {
 		  
 		  assertEquals("RayBandShades", a.getTitle());
 	  }
-	  
 	  @Test
 	  public void test_edit_Artist(){
 		  Artist art = em.find(Artist.class, 1);
@@ -152,7 +159,7 @@ public class PadTest {
 		  
 	  }
 	  
-	  // Testing Delete
+// Testing Delete
 	  
 		
 }
