@@ -17,15 +17,30 @@ pageEncoding="UTF-8"%>
 <div class="page-header">
 <h1 class="notePadHeader">All Artists All the time</h1>
 </div>
-
+<h4>Select an Artist to see a list of songs
 <form action="song.do">
   <select name="Artists">
   <c:forEach var = "artist" items = "${artists}">
     <option value="${artist.id}">${artist.name}</option>
   </c:forEach>
-
   </select>
   <br><br>
   <input type="submit">
 </form>
+</h4>
+<br>
+<h4>
+select an Artist to delete from the database
+<form action="deleteArtist.do">
+  <select name="Artists">
+  <c:forEach var = "artist" items = "${artists}">
+    <option value="${artist.id}">${artist.name}</option>
+  </c:forEach>
+  </select>
+  <br><br>
+  <input type="submit">
+</form>
+</h4>
+<br>
+<a href="album.do" class="btn btn-info btn-sm" role="button">or click here to add a new Artist to the database</a>
 </div>
