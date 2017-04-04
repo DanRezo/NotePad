@@ -6,7 +6,7 @@ This collaborative project was kept on track with the utilization of a Trello bo
 
 <p align="center">
 <img src="html5.gif" alt="HTML5 Icon" style="width:128px;height:128px;">
-<img src="../gitpics/login.png" alt="Home Page Login Screen" style="width:129px;height:128px;">
+<img src="./gitpics/login.png" alt="Home Page Login Screen" style="width:129px;height:128px;">
 </p>
 
 ## Issues The Team Ran Into:
