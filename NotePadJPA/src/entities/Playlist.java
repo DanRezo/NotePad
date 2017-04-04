@@ -2,6 +2,7 @@ package entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,9 +18,9 @@ public class Playlist {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String title;
-	@ManyToMany(mappedBy = "playlists")
+	@ManyToMany(mappedBy = "playlists", cascade= CascadeType.ALL)
 	private List<User> users;
-	@ManyToMany(mappedBy = "playlists")
+	@ManyToMany(mappedBy = "playlists", cascade= CascadeType.ALL)
 	private List<Song> songs;
 	@ManyToOne
 	@JoinColumn(name = "owner_id")

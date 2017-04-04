@@ -93,7 +93,6 @@ public class PadTest {
 		  Album a = dao.getAlbumById(1);
 		  s.setAlbum(a);
 		  
-		  System.out.println(s);
 		  Song al = dao.createNewSongWithNewAlbum(s, a);
 		  
 		  assertEquals("Up",al.getTitle());
