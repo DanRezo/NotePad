@@ -41,11 +41,24 @@ public class NoteDAOImpl implements NoteDAO {
 	}
 
 	@Override
-	public Playlist createPlaylist(Playlist playlist) {
+	public User createPlaylist(Playlist playlist, User user) {
+		
+		User managedUser = em.find(User.class, user.getId());
+		
+		playlist.setOwner(managedUser);
+		managedUser.getOwnedPlaylists().add(playlist);
+		managedUser.getPlaylists().add(playlist);
+		
 		em.persist(playlist);
+		em.persist(managedUser);
 		em.flush();
-
-		return null;
+		
+		String query = "SELECT u FROM User AS u JOIN FETCH u.playlists WHERE u.id = :id";
+		
+		User userWithPlaylists = em.createQuery(query, User.class)
+				.setParameter("id", managedUser.getId()).getSingleResult();
+		
+		return userWithPlaylists;
 	}
 
 	@Override

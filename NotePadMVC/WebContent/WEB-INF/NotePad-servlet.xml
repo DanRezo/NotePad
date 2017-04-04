@@ -12,7 +12,6 @@
 	<bean id="noteDao" class="data.NoteDAOImpl" />
 	<bean id="myPad" class="data.PadDAOImpl" />
 	<bean id="loginDAO" class="data.LoginDAOImpl" />
-	<!--  <bean id="myPad" class="data.PadDAOImpl" /> -->
 	
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

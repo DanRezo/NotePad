@@ -25,11 +25,15 @@ pageEncoding="UTF-8"%>
 <c:forEach var="playlist" items="${user.playlists}">
 <h4><a href="#col${playlist.id}Content" data-toggle="collapse">${playlist.title}</a></h4>
 <div id="#col${playlist.id}Content" class="collapse in">
-Song
+<a href="editPlaylist.do">Edit this Playlist</a>
 </div>
 </c:forEach>
 </div>
 </div>
-</div>
+<form action="createPlaylist.do" method="POST">
+	<input type="text" name="title" placeholder="Title"/>
+	<button type="submit" class="btn btn-info btn-lg">New Playlist</button>
+</form>
+OR <a href="routeToAddExistingPlaylist.do">Subscribe to an existing Playlist</a>
 </body>
 </html>

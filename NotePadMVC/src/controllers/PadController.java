@@ -14,6 +14,7 @@ import data.NoteDAO;
 import data.PadDAO;
 import entities.Album;
 import entities.Artist;
+import entities.Playlist;
 import entities.Song;
 import entities.User;
 
@@ -64,11 +65,6 @@ public class PadController{
 		return "song";
 	}
 	
-//	@RequestMapping(path="createPlaylist.do", method = RequestMethod.GET)
-//	public String routeToCreatePlaylist(){
-//		
-//	}
-	
 	@RequestMapping(path="routeToAddExistingPlaylist.do", method = RequestMethod.GET)
 	public String routeToAddExistingPlaylist(Model model, @ModelAttribute("user") User user){
 		
@@ -77,10 +73,12 @@ public class PadController{
 		return "addplaylist";
 	}
 	
-//	@RequestMapping(path="createPlaylist.do", method = RequestMethod.GET)
-//	public String createPlaylist(){
-//		
-//	}
+	@RequestMapping(path="createPlaylist.do", method = RequestMethod.POST)
+	public String createPlaylist(Model model, Playlist playlist, @ModelAttribute("user") User user){
+		
+		model.addAttribute("user", noteDAO.createPlaylist(playlist, user));
+		return "pad";		
+	}
 	
 	@RequestMapping(path="addExistingPlaylist.do", params = "id", method = RequestMethod.GET)
 	public String addExistingPlaylist(Model model, @ModelAttribute("user") User user, 
