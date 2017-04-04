@@ -36,7 +36,7 @@ This collaborative project was kept on track with the utilization of a Trello bo
    We were challenged to implement multiple controllers with this project. The path we decided to take was one where we broke up the responsibilities of the functionality of the project into three separate controllers. The structure of the project is outlined below.  COntrollers
 
 <p align="center">
-<img src="NotePad/gitpics/Structure.png" height="245">
+<img src="src/gitpics/Structure.png" height="245">
 </p>
 
 ## Code Examples
