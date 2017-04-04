@@ -13,27 +13,21 @@ pageEncoding="UTF-8"%>
 <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="npstyle.css"></head>
 <body>
-<div class="container">
 <div class="page-header">
 <h1 class="notePadHeader">${user.alias}</h1>
 </div>
-<c:forEach var="playlist" items="${user.playlists}">
-	<h2><a href="retrievePlaylist.do?id=${playlist.id}">${playlist.title}</a></h2>
-</c:forEach>
 <div class="container">
-<div class="notePadContainer">
-<c:forEach var="playlist" items="${user.playlists}">
-<h4><a href="#col${playlist.id}Content" data-toggle="collapse">${playlist.title}</a></h4>
-<div id="#col${playlist.id}Content" class="collapse in">
-<a href="editPlaylist.do">Edit this Playlist</a>
-</div>
+<c:forEach var="playlist" items="${playlists}">
+	<h2><a href="addExistingPlaylist.do?id=${playlist.id}">${playlist.title}</a></h2>
+	<ol>
+	<c:forEach var="song" items="${playlist.songs}">
+		<li>
+		${song.title}
+		${song.album.title}
+		</li>
+	</c:forEach>
+	</ol>
 </c:forEach>
 </div>
-</div>
-<form action="createPlaylist.do" method="POST">
-	<input type="text" name="title" placeholder="Title"/>
-	<button type="submit" class="btn btn-info btn-lg">New Playlist</button>
-</form>
-OR <a href="routeToAddExistingPlaylist.do">Subscribe to an existing Playlist</a>
 </body>
 </html>

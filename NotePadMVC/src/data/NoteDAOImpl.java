@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,11 +41,24 @@ public class NoteDAOImpl implements NoteDAO {
 	}
 
 	@Override
-	public Playlist createPlaylist(Playlist playlist) {
+	public User createPlaylist(Playlist playlist, User user) {
+		
+		User managedUser = em.find(User.class, user.getId());
+		
+		playlist.setOwner(managedUser);
+		managedUser.getOwnedPlaylists().add(playlist);
+		managedUser.getPlaylists().add(playlist);
+		
 		em.persist(playlist);
+		em.persist(managedUser);
 		em.flush();
-
-		return null;
+		
+		String query = "SELECT u FROM User AS u JOIN FETCH u.playlists WHERE u.id = :id";
+		
+		User userWithPlaylists = em.createQuery(query, User.class)
+				.setParameter("id", managedUser.getId()).getSingleResult();
+		
+		return userWithPlaylists;
 	}
 
 	@Override
@@ -83,19 +97,25 @@ public class NoteDAOImpl implements NoteDAO {
 	}
 
 	@Override
-	public Playlist addPlaylistUser(User user, Playlist playlist) {
+	public User addPlaylistUser(User user, int playlistId) {
 
-		Playlist managed = em.find(Playlist.class, playlist.getId());
+		Playlist managedPlaylist = em.find(Playlist.class, playlistId);
+		User managedUser = em.find(User.class, user.getId());
 
-		List<User> users = managed.getUsers();
-		users.add(user);
+		List<User> users = managedPlaylist.getUsers();
+		users.add(managedUser);
+		
+		List<Playlist> playlists = managedUser.getPlaylists();
+		playlists.add(managedPlaylist);
 
-		managed.setUsers(users);
+		managedUser.setPlaylists(playlists);
+		managedPlaylist.setUsers(users);
 
-		em.persist(managed);
+		em.persist(managedPlaylist);
+		em.persist(managedUser);
 		em.flush();
 
-		return managed;
+		return managedUser;
 	}
 
 	@Override
@@ -116,5 +136,19 @@ public class NoteDAOImpl implements NoteDAO {
 		em.flush();
 
 		return managed;
+	}
+
+	@Override
+	public List<Playlist> showAllPlaylists() {
+		
+		String query = "SELECT DISTINCT p FROM Playlist AS p JOIN FETCH p.songs";
+		
+		List<Playlist> playlists = em.createQuery(query, Playlist.class).getResultList();
+		
+		for(Playlist p : playlists) {
+			System.out.println(p.getTitle());
+		}
+		
+		return playlists;
 	}
 }

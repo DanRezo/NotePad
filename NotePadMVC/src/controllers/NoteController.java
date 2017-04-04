@@ -36,7 +36,7 @@ public class NoteController{
 		mv.setViewName("artist");
 		return mv;
 	}
-	
+
 	@RequestMapping(path="song.do", params = "Artists", method = RequestMethod.GET)
 	public ModelAndView listSong(@RequestParam("Artists") int Artists){
 		List<Song> songs = padDAO.getSongsByArtist(Artists);
@@ -51,14 +51,14 @@ public class NoteController{
 		mv.addObject("newArtist", newArtist);
 		return "artist";
 	}
-	
+
 	@RequestMapping(path = "editArtist.do", method = RequestMethod.GET)
 	public String editArtist(int id, Artist artist){
 		Artist newArtist = padDAO.edit(id, artist);
 		mv.addObject("newArtist", newArtist);
 		return "artist";
 	}
-		
+
 	@RequestMapping(path = "deleteArtist.do", method = RequestMethod.GET)
 	public String deleteArtist(Artist artist){
 		padDAO.deleteArtist(artist);
@@ -77,34 +77,34 @@ public class NoteController{
 		mv.addObject("newAlbum", newAlbum);
 		return "album";
 	}
-	
+
 	@RequestMapping(path = "deleteAlbum.do", method = RequestMethod.GET)
 	public String deleteAlbum(Album album){
 		padDAO.deleteAlbum(album);
 		return "album";
 	}
-	
+
 	@RequestMapping(path = "newSongExistingAlbum.do" , method = RequestMethod.GET)
 	public String createNewSongWithExistingAlbum(Song song, Album album){
 		Song newSong = padDAO.createNewSongWithExistingAlbum(song, album);
 		mv.addObject("newSong", newSong);
 		return "song";
 	}
-	
+
 	@RequestMapping(path = "NewSongNewAlbum.do" , method = RequestMethod.GET)
 	public String createNewSongWithNewAlbum(Song song){
 		Song newSong = padDAO.createNewSongWithNewAlbum(song);
 		mv.addObject("newSong", newSong);
 		return "song";
 	}
-	
+
 	@RequestMapping(path = "editSong.do" , method = RequestMethod.GET)
 	public String editSong(int id, Song song){
 		Song newSong = padDAO.edit(id, song);
 		mv.addObject("newSong", newSong);
 		return "song";
 	}
-	
+
 	@RequestMapping(path = "deleteSong.do", method = RequestMethod.GET)
 	public String deleteSong(Song song){
 		padDAO.deleteSong(song);
