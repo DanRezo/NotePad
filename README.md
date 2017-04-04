@@ -16,7 +16,7 @@ This collaborative project was kept on track with the utilization of a Trello bo
 ## Issues The Team Ran Into:
 With many ManyToMany relationships in our schema the team encountered instances where retrieving certain information about songs difficult. One instance was with the genre. Songs are entities which take an album_id and inherit the Genre based on that album. We couldn't retrieve this without first querying the genre by id and then create a new ArrayList our song entity. Then, we iterated over the Album entity looking for genres of those albums and added all songs of those albums into the list of songs created earlier.
 <p align="center">
-<img src="./gitpics/schema.png" alt="Groovy Pad" style="width:128px;height:128px;">
+<img src="./gitpics/schema.png" alt="Groovy Pad" width="128" height="128"">
 </p>
 
 [Code Examples](#code-examples)
