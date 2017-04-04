@@ -10,8 +10,8 @@ This collaborative project was kept on track with the utilization of a Trello bo
 
 
 <p align="center">
-<img src="./gitpics/pad.png" alt="Groovy Pad" height>
-<img src="./gitpics/schema.png" alt="Groovy Pad" height="245"">
+<img src="./gitpics/pad.png" alt="Groovy Pad"  width="128" height"245">
+<img src="./gitpics/schema.png" alt="model" width="128" height="245"">
 </p>
 
 ## Issues The Team Ran Into:
