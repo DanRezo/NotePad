@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
@@ -26,21 +27,37 @@ public class PadDAOImpl  implements PadDAO{
 //Create	
 	@Override
 	public Artist createNewArtist(Artist artist){
-		if(artist.getName() != artist.getName()){
-		em.persist(artist);
-		em.flush();
+		try {
+			String queryString = "SELECT a FROM Artist a WHERE a.name = :name";
+			em.createQuery(queryString, Artist.class).setParameter("name", artist.getName()).getSingleResult();
+			
+			return null;
+			
+		} catch (NoResultException e ) {
+			em.persist(artist);
+			em.flush();
+		
+			return artist;
 		}
-		return artist;
 	}
 	@Override
 	public Album createNewAlbum(Album album){
+		try {
+			String queryString = "SELECT a FROM Album a WHERE a.title = :title";
+			em.createQuery(queryString, Artist.class).setParameter("name", album.getTitle()).getSingleResult();
+			
+			return null;
+			
+		} catch (NoResultException e ) {
+			em.persist(album);
+			em.flush();
+			
+			return album;
+		}
 		
-		em.persist(album);
-		em.flush();
-		return album;
 	}
 	@Override
-	public Song createNewSongWithNewAlbum(Song song, Album album){
+	public Song createNewSongWithNewAlbum(Song song){
 	em.persist(song);
 	em.flush();
 	return song;

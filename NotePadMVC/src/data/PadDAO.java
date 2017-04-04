@@ -11,7 +11,7 @@ public interface PadDAO {
 
 	public Artist createNewArtist(Artist artist);
 	public Album createNewAlbum(Album album);
-	public Song createNewSongWithNewAlbum(Song song, Album album);
+	public Song createNewSongWithNewAlbum(Song song);
 	public Song createNewSongWithExistingAlbum(Song song, Album album);
 	public Album edit(int id, Album album);
 	public Song edit(int id, Song song);
