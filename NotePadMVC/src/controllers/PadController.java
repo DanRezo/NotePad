@@ -63,6 +63,37 @@ public class PadController{
 		mv.addObject("song", song);
 		return "song";
 	}
+	
+//	@RequestMapping(path="createPlaylist.do", method = RequestMethod.GET)
+//	public String routeToCreatePlaylist(){
+//		
+//	}
+	
+	@RequestMapping(path="routeToAddExistingPlaylist.do", method = RequestMethod.GET)
+	public String routeToAddExistingPlaylist(Model model, @ModelAttribute("user") User user){
+		
+		model.addAttribute("user", user);
+		model.addAttribute("playlists", noteDAO.showAllPlaylists());
+		return "addplaylist";
+	}
+	
+//	@RequestMapping(path="createPlaylist.do", method = RequestMethod.GET)
+//	public String createPlaylist(){
+//		
+//	}
+	
+	@RequestMapping(path="addExistingPlaylist.do", params = "id", method = RequestMethod.GET)
+	public String addExistingPlaylist(Model model, @ModelAttribute("user") User user, 
+			@RequestParam("id") int id){
+		
+		model.addAttribute("user", noteDAO.addPlaylistUser(user, id));
+		return "pad";
+	}
+	
+//	@RequestMapping(path="editPlaylist.do", method = RequestMethod.GET)
+//	public String editPlaylist() {
+//		
+//	}
 
 }
 

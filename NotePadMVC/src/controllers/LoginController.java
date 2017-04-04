@@ -36,7 +36,6 @@ public class LoginController {
 				userAttemptedLogin.getAlias(), userAttemptedLogin.getPassword());
 		
 		if (user != null) {
-//			model.addAttribute("playlists", user.getPlaylists());
 			model.addAttribute("user", user);
 			return "pad";
 		} else {
