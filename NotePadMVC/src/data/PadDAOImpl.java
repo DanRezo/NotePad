@@ -39,6 +39,7 @@ public class PadDAOImpl  implements PadDAO{
 		
 			return artist;
 		}
+		
 	}
 	@Override
 	public Album createNewAlbum(Album album){
@@ -62,6 +63,7 @@ public class PadDAOImpl  implements PadDAO{
 	em.flush();
 	return song;
 	}
+	@Override
 	public Song createNewSongWithExistingAlbum(Song song, Album album){
 		em.persist(song);
 		em.flush();
@@ -164,7 +166,25 @@ public class PadDAOImpl  implements PadDAO{
 	
 //	Delete
 	
-
+	@Override
+	public boolean deleteArtist(Artist artist) {
+		Artist deadArtist = em.find(Artist.class, artist.getId());
+		em.remove(deadArtist);
+		return em.contains(deadArtist);
+	}
+		
+	@Override
+	public boolean deleteAlbum(Album album) {
+		Album deadAlbum = em.find(Album.class, album.getId());
+		em.remove(deadAlbum);
+		return em.contains(deadAlbum);
+	}
 	
+	@Override
+		public boolean deleteSong(Song song) {
+		Song deadSong = em.find(Song.class, song.getId());
+		em.remove(deadSong);
+		return em.contains(deadSong);	
+	}
 }
 
