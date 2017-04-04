@@ -44,7 +44,7 @@ public class PadDAOImpl  implements PadDAO{
 	public Album createNewAlbum(Album album){
 		try {
 			String queryString = "SELECT a FROM Album a WHERE a.title = :title";
-			em.createQuery(queryString, Artist.class).setParameter("name", album.getTitle()).getSingleResult();
+			em.createQuery(queryString, Album.class).setParameter("name", album.getTitle()).getSingleResult();
 			
 			return null;
 			
@@ -164,7 +164,62 @@ public class PadDAOImpl  implements PadDAO{
 	
 //	Delete
 	
+	@Override
+	public boolean removeArtist(Artist artist) {
 
+		try {
+			String queryString = "SELECT a FROM Artist a WHERE a.name = :name";
+			em.createQuery(queryString, Song.class).setParameter("name", artist.getName()).getSingleResult();
+			
+			
+			em.remove(artist);
+			em.flush();
+			
+			return true;
+			
+		} catch (NoResultException e ) {
+		
+			return false;
+		}
+	}
 	
+	@Override
+	public boolean removeSong(Song song) {
+
+		try {
+			String queryString = "SELECT s FROM Song s WHERE s.title = :title";
+			em.createQuery(queryString, Song.class).setParameter("title", song.getTitle()).getSingleResult();
+			
+			
+			em.remove(song);
+			em.flush();
+			
+			return true;
+			
+		} catch (NoResultException e ) {
+		
+			return false;
+		}
+	}
+	
+	@Override
+	public boolean removeAlbum(Album album) {
+		
+		try {
+			String queryString = "SELECT a FROM Album a WHERE a.title = :title";
+			em.createQuery(queryString, Album.class).setParameter("title", album.getTitle()).getSingleResult();
+			
+			
+			em.remove(album);
+			em.flush();
+			
+			return true;
+			
+		} catch (NoResultException e ) {
+		
+			return false;
+		}
+
+	}
 }
 

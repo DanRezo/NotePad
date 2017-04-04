@@ -26,5 +26,8 @@ public interface PadDAO {
 	public Artist showArtist(int id);
 	public Album showAlbum(int id);
 	public Song showSong(int id);
+	public boolean removeArtist(Artist artist);
+	public boolean removeSong(Song song);
+	public boolean removeAlbum(Album album);
 
 }
