@@ -3,11 +3,17 @@ NotePad is a music based web-app which allows users to to perform CRUD functiona
 
 This collaborative project was kept on track with the utilization of a Trello board. This was the first time many of use had used Trello. During the build of NotePad we were able to stay on track with daily milestones, as well as communicate effectively using the #slack integrated power-up. Communication was paramount to avoiding merge conflicts as one of the teammates was in a different state for the beginning of the project.
 
-## Issues the team ran into:
+
+<p align="center">
+<img src="html5.gif" alt="HTML5 Icon" style="width:128px;height:128px;">
+<img src="../gitpics/login.png" alt="Home Page Login Screen" style="width:129px;height:128px;">
+</p>
+
+## Issues The Team Ran Into:
 With many ManyToMany relationships in our schema the team encountered instances where retrieving certain information about songs difficult. One instance was with the genre. Songs are entities which take an album_id and inherit the Genre based on that album. We couldn't retrieve this without first querying the genre by id and then create a new ArrayList our song entity. Then, we iterated over the Album entity looking for genres of those albums and added all songs of those albums into the list of songs created earlier.
     [Code Examples](#code-examples)
 
-## If more time were available:
+## If More Time Were Available:
   Stretch goals for the project include:
   - Sharing playlists between users.
   - Comment on playlists from other users.
@@ -33,7 +39,7 @@ With many ManyToMany relationships in our schema the team encountered instances 
 
 
 ## Class Structure Overview
-   We were challenged to implement multiple controllers with this project. The path we decided to take was one where we broke up the responsibilities of the functionality of the project into three separate controllers. The structure of the project is outlined below.  COntrollers
+   We were challenged to implement multiple controllers within this project. The path we decided to take was one where we broke up the responsibilities of the functionality of the project into three separate controllers. The structure of the project is outlined below.
 
 ![alt text](gitpics/Structure.png "Overview of Project Structure")
 
