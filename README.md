@@ -35,9 +35,7 @@ With many ManyToMany relationships in our schema the team encountered instances 
 ## Class Structure Overview
    We were challenged to implement multiple controllers with this project. The path we decided to take was one where we broke up the responsibilities of the functionality of the project into three separate controllers. The structure of the project is outlined below.  COntrollers
 
-<p align="center">
-<img src="src/gitpics/Structure" height="245">
-</p>
+![alt text](gitpics/Structure.png "Overview of Project Structure")
 
 ## Code Examples
 ``` java
