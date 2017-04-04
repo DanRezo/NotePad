@@ -37,13 +37,6 @@ public class PadController{
 		return "playlist";
 	}
 
-	@RequestMapping(path = "editSong.do", method = RequestMethod.GET)
-		public String editSong(int id, Song song){
-		song = padDAO.edit(id,  song);
-		mv.addObject("song", song);
-		return "song";
-	}
-
 	@RequestMapping(path="routeToAddExistingPlaylist.do", method = RequestMethod.GET)
 	public String routeToAddExistingPlaylist(Model model, @ModelAttribute("user") User user){
 
