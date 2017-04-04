@@ -15,7 +15,17 @@ pageEncoding="UTF-8"%>
 <body>
 <div class="container">
 <div class="page-header">
-<h1 class="notePadHeader">Welcome to NotePad</h1>
+<h1 class="notePadHeader">All Artists All the time</h1>
 </div>
 
+<form action="song.do">
+  <select name="Artists">
+  <c:forEach var = "artist" items = "${artists}">
+    <option value="${artist.id}">${artist.name}</option>
+  </c:forEach>
+
+  </select>
+  <br><br>
+  <input type="submit">
+</form>
 </div>
