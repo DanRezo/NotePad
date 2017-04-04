@@ -18,35 +18,9 @@
 <body>
 	<div class="container">
 		<div class="page-header">
-			<h1 class="notePadHeader">All Artists All the time</h1>
+			<h1 class="notePadHeader"><font color="red">That Artist is TOAST!!</font></h1>
 		</div>
-		<form action="song.do">
-			<select name="Artists">
-				<c:forEach var="artist" items="${artists}">
-					<option value="${artist.id}">${artist.name}</option>
-				</c:forEach>
-			</select>
+		
 			<h4>
-				<button id="bar" type="submit">See all the songs from this
-					artist</button>
-			</h4>
-			<br><br>
-		</form>
-		<br>
-		<form action="deleteArtist.do">
-			<select name="Artists">
-				<c:forEach var="artist" items="${artists}">
-					<option value="${artist.id}">${artist.name}</option>
-				</c:forEach>
-			</select>
-			<h4>
-				<button id="bar" type="submit">Delete that sucker!(Cannot
-					be undone)</button>
-			</h4>
-			<br><br><br>
-		</form>
-		<h4>
-			<a href="createAlbum.do" class="btn btn-info btn-med" role="button">or
-				click here to add a new Artist to the database</a>
+			<a href="pad.jsp" class="btn btn-info btn-med" role="button">click here to return to your pad</a>
 		</h4>
-	</div>

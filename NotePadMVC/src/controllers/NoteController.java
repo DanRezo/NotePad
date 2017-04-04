@@ -44,71 +44,71 @@ public class NoteController{
 		mv.setViewName("song");
 		return mv;
 	}
+	
+	
 
 	@RequestMapping(path = "newArtist.do", method = RequestMethod.GET)
-	public String createArtist(Artist artist){
-		Artist newArtist = padDAO.createNewArtist(artist);
-		mv.addObject("newArtist", newArtist);
-		return "artist";
-	}
-
-	@RequestMapping(path = "editArtist.do", method = RequestMethod.GET)
-	public String editArtist(int id, Artist artist){
-		Artist newArtist = padDAO.edit(id, artist);
-		mv.addObject("newArtist", newArtist);
-		return "artist";
+	public ModelAndView createArtist(){
+//		Artist newArtist = padDAO.createNewArtist(artist);
+//		mv.addObject("newArtist", newArtist);
+		mv.setViewName("album");
+		return mv;
 	}
 
 	@RequestMapping(path = "deleteArtist.do", method = RequestMethod.GET)
-	public String deleteArtist(Artist artist){
-		padDAO.deleteArtist(artist);
-		return "artist";
+	public ModelAndView deleteArtist(@RequestParam("Artists") int Artists){
+		if (padDAO.deleteArtist(Artists))
+			mv.setViewName("deleteFail");
+		else
+			mv.setViewName("success");
+		return mv;
+
 	}
 
-	@RequestMapping(path = "newAlbum.do", method = RequestMethod.GET)
-	public String createNewAlbum(Album album){
-		Album newAlbum = padDAO.createNewAlbum(album);
-		mv.addObject("newAlbum", newAlbum);
-		return "album";
-	}
-	@RequestMapping(path = "editAlbum.do", method = RequestMethod.GET)
-	public String edit(int id, Album album){
-		Album newAlbum = padDAO.edit(id, album);
-		mv.addObject("newAlbum", newAlbum);
-		return "album";
-	}
-
-	@RequestMapping(path = "deleteAlbum.do", method = RequestMethod.GET)
-	public String deleteAlbum(Album album){
-		padDAO.deleteAlbum(album);
-		return "album";
-	}
-
-	@RequestMapping(path = "newSongExistingAlbum.do" , method = RequestMethod.GET)
-	public String createNewSongWithExistingAlbum(Song song, Album album){
-		Song newSong = padDAO.createNewSongWithExistingAlbum(song, album);
-		mv.addObject("newSong", newSong);
-		return "song";
-	}
-
-	@RequestMapping(path = "NewSongNewAlbum.do" , method = RequestMethod.GET)
-	public String createNewSongWithNewAlbum(Song song){
-		Song newSong = padDAO.createNewSongWithNewAlbum(song);
-		mv.addObject("newSong", newSong);
-		return "song";
-	}
-
-	@RequestMapping(path = "editSong.do" , method = RequestMethod.GET)
-	public String editSong(int id, Song song){
-		Song newSong = padDAO.edit(id, song);
-		mv.addObject("newSong", newSong);
-		return "song";
-	}
-
-	@RequestMapping(path = "deleteSong.do", method = RequestMethod.GET)
-	public String deleteSong(Song song){
-		padDAO.deleteSong(song);
-		return "song";
-	}
+//	@RequestMapping(path = "newAlbum.do", method = RequestMethod.GET)
+//	public String createNewAlbum(Album album){
+//		Album newAlbum = padDAO.createNewAlbum(album);
+//		mv.addObject("newAlbum", newAlbum);
+//		return "album";
+//	}
+//	@RequestMapping(path = "editAlbum.do", method = RequestMethod.GET)
+//	public String edit(int id, Album album){
+//		Album newAlbum = padDAO.edit(id, album);
+//		mv.addObject("newAlbum", newAlbum);
+//		return "album";
+//	}
+//
+//	@RequestMapping(path = "deleteAlbum.do", method = RequestMethod.GET)
+//	public String deleteAlbum(Album album){
+//		padDAO.deleteAlbum(album);
+//		return "album";
+//	}
+//
+//	@RequestMapping(path = "newSongExistingAlbum.do" , method = RequestMethod.GET)
+//	public String createNewSongWithExistingAlbum(Song song, Album album){
+//		Song newSong = padDAO.createNewSongWithExistingAlbum(song, album);
+//		mv.addObject("newSong", newSong);
+//		return "song";
+//	}
+//
+//	@RequestMapping(path = "NewSongNewAlbum.do" , method = RequestMethod.GET)
+//	public String createNewSongWithNewAlbum(Song song){
+//		Song newSong = padDAO.createNewSongWithNewAlbum(song);
+//		mv.addObject("newSong", newSong);
+//		return "song";
+//	}
+//
+//	@RequestMapping(path = "editSong.do" , method = RequestMethod.GET)
+//	public String editSong(int id, Song song){
+//		Song newSong = padDAO.edit(id, song);
+//		mv.addObject("newSong", newSong);
+//		return "song";
+//	}
+//
+//	@RequestMapping(path = "deleteSong.do", method = RequestMethod.GET)
+//	public String deleteSong(Song song){
+//		padDAO.deleteSong(song);
+//		return "song";
+//	}
 
 }

@@ -118,7 +118,6 @@ public class PadDAOImpl  implements PadDAO{
 	@Override
 	public Artist edit(int id, Artist artist){
 		Artist a = em.find(Artist.class, id);
-		
 		a.setName(artist.getName());
 		a.setPicture(artist.getPicture());
 		return a;
@@ -196,8 +195,8 @@ public class PadDAOImpl  implements PadDAO{
 //	Delete
 	
 	@Override
-	public boolean deleteArtist(Artist artist) {
-		Artist deadArtist = em.find(Artist.class, artist.getId());
+	public boolean deleteArtist(int id) {
+		Artist deadArtist = em.find(Artist.class, id);
 		em.remove(deadArtist);
 		return em.contains(deadArtist);
 	}
