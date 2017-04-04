@@ -15,17 +15,31 @@ pageEncoding="UTF-8"%>
 <body>
 <div class="container">
 <div class="page-header">
-<h1 class="notePadHeader">${user.alias}</h1>
+<h1 class="notePadHeader">${playlist.title}</h1>
 </div>
-<c:forEach var="playlist" items="${user.playlists}">
-	<h2><a href="retrievePlaylist.do?id=${playlist.id}">${playlist.title}</a></h2>
+</div>
+<div class="container">
+<div class="notePadContainer">
+<c:choose>
+<c:when test="${!emptyPlaylist}">
+<table>
+<tr>
+<th>Song</th>
+<th>Album</th>
+</tr>
+<c:forEach var="song" items="${playlist.songs}">
+<tr>
+		<td>${song.title}</td>
+		<td>${song.album.title}</td>
+</tr>
 </c:forEach>
-</div>
-<form action="createPlaylist.do" method="POST">
-	<input type="text" name="title" placeholder="Title"/>
-	<button type="submit" class="btn btn-info btn-lg">New Playlist</button>
-</form>
+</table>
+</c:when>
+</c:choose>
+<a href="AddSongToPlaylist.do?id=${playlist.id}">Add a song to this Playlist</a>
 <h3>OR</h3>
-<a href="routeToAddExistingPlaylist.do">Subscribe to an existing Playlist</a>
+<a href="createNewAlbum.do">Create a New Album</a><br>
+</div>
+</div>
 </body>
 </html>
