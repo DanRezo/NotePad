@@ -15,21 +15,7 @@ pageEncoding="UTF-8"%>
 <body>
 <div class="container">
 <div class="page-header">
-<h1 class="notePadHeader">${user.alias}</h1>
+<h1 class="notePadHeader">Welcome to NotePad</h1>
 </div>
-<c:forEach var="playlist" items="${user.playlists}">
-	<h2><a href="retrievePlaylist.do?id=${playlist.id}">${playlist.title}</a></h2>
-</c:forEach>
-<div class="container">
-<div class="notePadContainer">
-<c:forEach var="playlist" items="${user.playlists}">
-<h4><a href="#col${playlist.id}Content" data-toggle="collapse">${playlist.title}</a></h4>
-<div id="#col${playlist.id}Content" class="collapse in">
-Song
+
 </div>
-</c:forEach>
-</div>
-</div>
-</div>
-</body>
-</html>
