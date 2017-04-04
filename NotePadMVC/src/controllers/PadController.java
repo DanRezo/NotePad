@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 import entities.Album;
 import entities.Artist;
@@ -43,6 +44,7 @@ public class PadController{
 		album = padDAO.create(album);
 		mv.addObject("album", album);
 		return "album";
+	}
 
 
 	@RequestMapping(value="retrievePlaylist.do", params = "id", method = RequestMethod.GET)
