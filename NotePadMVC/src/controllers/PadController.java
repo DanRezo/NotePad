@@ -51,55 +51,39 @@ public class PadController{
 		return "playlist";
 	}
 
-//	@RequestMapping(path = "createSong.do", method = RequestMethod.GET)
-//		public String createSong(Song song){
-//		song = padDAO.create(song);
-//		mv.addObject("song", song);
-//		return "song";
-//	}
-
 	@RequestMapping(path = "editSong.do", method = RequestMethod.GET)
 		public String editSong(int id, Song song){
 		song = padDAO.edit(id,  song);
 		mv.addObject("song", song);
 		return "song";
 	}
-	
+
 	@RequestMapping(path="routeToAddExistingPlaylist.do", method = RequestMethod.GET)
 	public String routeToAddExistingPlaylist(Model model, @ModelAttribute("user") User user){
-		
+
 		model.addAttribute("user", user);
 		model.addAttribute("playlists", noteDAO.showAllPlaylists());
 		return "addplaylist";
 	}
-	
+
 	@RequestMapping(path="createPlaylist.do", method = RequestMethod.POST)
 	public String createPlaylist(Model model, Playlist playlist, @ModelAttribute("user") User user){
-		
+
 		model.addAttribute("user", noteDAO.createPlaylist(playlist, user));
-		return "pad";		
+		return "pad";
 	}
-	
+
 	@RequestMapping(path="addExistingPlaylist.do", params = "id", method = RequestMethod.GET)
-	public String addExistingPlaylist(Model model, @ModelAttribute("user") User user, 
+	public String addExistingPlaylist(Model model, @ModelAttribute("user") User user,
 			@RequestParam("id") int id){
-		
+
 		model.addAttribute("user", noteDAO.addPlaylistUser(user, id));
 		return "pad";
 	}
-	
+
 //	@RequestMapping(path="editPlaylist.do", method = RequestMethod.GET)
 //	public String editPlaylist() {
-//		
+//
 //	}
 
 }
-
-//public Song edit(int id, Song song);
-//public Artist edit(int id, Artist artist);
-//public List <Song> getSongsByAlbum(int id);
-//public List <Song> getSongsByArtist(int id);
-//public List <Song> getSongsByGenre(int id);
-//public List <Album> getAlbumsByArtist(int id);
-//public List <Album> getAlbumsByGenre(int id);
-//public List<Playlist> showPlaylistByUser(int id);
