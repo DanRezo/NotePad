@@ -29,20 +29,6 @@ public class PadController{
 	@Autowired
 	NoteDAO noteDAO;
 
-	@RequestMapping(path = "createArtist.do", method = RequestMethod.GET)
-	public String createArtist(Artist artist){
-		artist = padDAO.createNewArtist(artist);
-		mv.addObject("artist", artist);
-		return "artist";
-	}
-
-	@RequestMapping(path = "createAlbum.do", method = RequestMethod.GET)
-	public String createNewAlbum(Album album){
-		album = padDAO.createNewAlbum(album);
-		mv.addObject("album", album);
-		return "album";
-	}
-
 	@RequestMapping(value="retrievePlaylist.do", params = "id", method = RequestMethod.GET)
 	public String test(@ModelAttribute("user") User user, @RequestParam("id") int id, Model model){
 
