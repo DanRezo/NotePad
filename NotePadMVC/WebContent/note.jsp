@@ -8,6 +8,6 @@
 </head>
 <body>
 <a href="test2.do">test</a>
-
+<a href="goToPad.do" class="btn btn-info btn-lg" role="button">Go Home</a>
 </body>
 </html>

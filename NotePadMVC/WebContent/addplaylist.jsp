@@ -28,6 +28,7 @@ pageEncoding="UTF-8"%>
 	</c:forEach>
 	</ol>
 </c:forEach>
+<a href="goToPad.do" class="btn btn-info btn-lg" role="button">Go Home</a>
 </div>
 </body>
 </html>

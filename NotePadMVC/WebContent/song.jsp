@@ -27,7 +27,7 @@ pageEncoding="UTF-8"%>
 <br>
 </c:forEach>
 </div>
-<a href="goToPad.do">Go Home</a><br>
+<a href="goToPad.do" class="btn btn-info btn-lg" role="button">Go Home</a>
 </div>
 </body>
 </html>

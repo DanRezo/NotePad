@@ -23,20 +23,22 @@
 			<c:forEach items="${album.songs}" var="song">
 ${song.title}   <a href="getAlbum.do?id=${song.id}">Add song to play
 					list</a>
-					<form action="editSongForm.do" >
-					<button id="button" name="id" value="${song.id }" type="submit">Edit Song</button><br>
-					<input type="hidden" name="albumId" value="${album.id }" />
+				<form action="editSongForm.do">
+					<button id="button" name="id" value="${song.id }" type="submit">Edit
+						Song</button>
+					<br> <input type="hidden" name="albumId" value="${album.id }" />
 				</form>
 				<br>
-				<form action="deleteSong.do" >
-					<button id="button"  name="id"  value="${song.id}"type="submit">Remove Song(Cannot be
-						undone)</button><br>
-						</form>
-						
+				<form action="deleteSong.do">
+					<button id="button" name="id" value="${song.id}" type="submit">Remove
+						Song(Cannot be undone)</button>
+					<br>
+				</form>
+
 
 			</c:forEach>
-			<a href="goToPad.do">Go Home</a> <br> 
-			<a href="getSongs.do">Back to Albums</a>
+			<a href="goToPad.do" class="btn btn-info btn-lg" role="button">Go
+				Home</a> <a href="getSongs.do">Back to Albums</a>
 
 		</div>
 	</div>

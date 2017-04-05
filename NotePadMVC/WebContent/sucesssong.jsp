@@ -18,9 +18,12 @@
 <body>
 	<div class="container">
 		<div class="page-header">
-			<h1 class="notePadHeader"><font color="red">That Song is TOAST!!</font></h1>
+			<h1 class="notePadHeader">
+				<font color="red">That Song is TOAST!!</font>
+			</h1>
 		</div>
-		
-			<h4>
-			<a href="pad.jsp" class="btn btn-info btn-med">click here to return to your pad</a>
+
+		<h4>
+			<a href="goToPad.do" class="btn btn-info btn-lg" role="button">Go
+				Home</a>
 		</h4>

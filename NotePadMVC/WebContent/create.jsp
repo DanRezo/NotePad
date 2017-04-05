@@ -33,5 +33,6 @@ pageEncoding="UTF-8"%>
 </div>
 </form>
 </div>
+<a href="goToPad.do" class="btn btn-info btn-lg" role="button">Go Home</a>
 </body>
 </html>

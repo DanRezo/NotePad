@@ -25,4 +25,6 @@
 					<a href="deleteAlbums.do?albumId=${album.id}" class="btn btn-info btn-lg" role="button">Delete</a>					</c:forEach>
 					</div>
 	</div>
+<a href="goToPad.do" class="btn btn-info btn-lg" role="button">Go Home</a>
 </body>
+</html>

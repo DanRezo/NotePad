@@ -21,5 +21,6 @@ pageEncoding="UTF-8"%>
 	<h2><a href="addPlaylist.do?id=${playlist.id}">${playlist.title}</a></h2>
 </c:forEach>
 </div>
+<a href="goToPad.do" class="btn btn-info btn-lg" role="button">Go Home</a>
 </body>
 </html>

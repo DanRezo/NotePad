@@ -43,11 +43,11 @@ pageEncoding="UTF-8"%>
 </c:choose>
 <a href="getSongs.do?id=${playlist.id}">Add a song to this Playlist</a>
 <h3>OR</h3>
-<a href="createNewAlbum.do">Create a New Album</a><br>
+<a href="NewSongNewAlbum.do">Create a New Song</a><br>
 <h3>OR</h3>
 <a href="deletePlaylist.do?playlistId=${playlist.id}">Delete this Playlist</a><br>
 <h3>OR</h3>
-<a href="goToPad.do">Go Home</a><br>
+<a href="goToPad.do" class="btn btn-info btn-lg" role="button">Go Home</a>
 </div>
 </div>
 </body>
