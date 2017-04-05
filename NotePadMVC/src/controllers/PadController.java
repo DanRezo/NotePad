@@ -20,7 +20,7 @@ import entities.Song;
 import entities.User;
 
 @Controller
-@SessionAttributes({"user"})
+@SessionAttributes({"user", "playlist"})
 public class PadController{
 	ModelAndView mv = new ModelAndView();
 
@@ -31,7 +31,7 @@ public class PadController{
 	NoteDAO noteDAO;
 
 	@RequestMapping(value="retrievePlaylist.do", params = "id", method = RequestMethod.GET)
-	public String test(@ModelAttribute("user") User user, @RequestParam("id") int id, Model model){
+	public String test(@RequestParam("id") int id, Model model){
 
 		Playlist playlist = noteDAO.showPlaylist(id);
 		
@@ -64,6 +64,13 @@ public class PadController{
 			@RequestParam("id") int id){
 
 		model.addAttribute("user", noteDAO.addPlaylistUser(user, id));
+		return "pad";
+	}
+	
+	@RequestMapping(path="goToPad.do", method = RequestMethod.GET)
+	public String goToPad(Model model, @ModelAttribute("user") User user){
+		
+		model.addAttribute("user", user);
 		return "pad";
 	}
 

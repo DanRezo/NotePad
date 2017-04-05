@@ -20,8 +20,8 @@ body {
    background: rgba(226, 229, 255, 0.5);
 }
 
-table, tr, th,  {
-	padding: 2cm 2cm 2cm 2cm:
+.notePadTable  {
+	padding: 3px 3px 3px 3px;
 }
 
 .signIn {

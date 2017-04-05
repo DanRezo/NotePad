@@ -39,6 +39,7 @@ pageEncoding="UTF-8"%>
 <a href="AddSongToPlaylist.do?id=${playlist.id}">Add a song to this Playlist</a>
 <h3>OR</h3>
 <a href="createNewAlbum.do">Create a New Album</a><br>
+<a href="goToPad.do">Go Home</a><br>
 </div>
 </div>
 </body>
