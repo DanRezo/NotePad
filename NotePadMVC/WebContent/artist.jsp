@@ -27,7 +27,7 @@
 				</c:forEach>
 			</select>
 			<h4>
-				<button id="bar" type="submit">See all the songs from this
+				<button id="bar" type="submit">See all the albums from this
 					artist</button>
 			</h4>
 			<br><br>
@@ -46,7 +46,7 @@
 			<br><br><br>
 		</form>
 		<h4>
-			<a href="createAlbum.do" class="btn btn-info btn-med" role="button">or
+			<a href="createAlbum.do" class="btn btn-info btn-med">or
 				click here to add a new Artist to the database</a>
 		</h4>
 	</div>
