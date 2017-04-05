@@ -21,6 +21,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
 	private String alias;
 	@Column(name = "first_name")
 	private String firstName;
@@ -66,6 +67,10 @@ public class User {
 
 	public String getPassword() {
 		return password;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public void setPassword(String password) {

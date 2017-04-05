@@ -18,7 +18,7 @@ pageEncoding="UTF-8"%>
 </div>
 <div class="container">
 <c:forEach var="playlist" items="${playlists}">
-	<h2><a href="addExistingPlaylist.do?id=${playlist.id}">${playlist.title}</a></h2>
+	<h2><a href="addExistingPlaylist.do?playlistid=${playlist.id}">${playlist.title}</a></h2>
 	<ol>
 	<c:forEach var="song" items="${playlist.songs}">
 		<li>

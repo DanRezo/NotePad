@@ -50,11 +50,15 @@ public class NoteDAOImpl implements NoteDAO {
 	}
 
 	@Override
-	public User createPlaylist(Playlist playlist, User user) {
+	public User createPlaylist(String title, User user) {
 
 		User managedUser = em.find(User.class, user.getId());
-
+		
+		Playlist playlist = new Playlist();
+		
+		playlist.setTitle(title);
 		playlist.setOwner(managedUser);
+
 		managedUser.getOwnedPlaylists().add(playlist);
 		managedUser.getPlaylists().add(playlist);
 
@@ -88,41 +92,82 @@ public class NoteDAOImpl implements NoteDAO {
 	}
 
 	@Override
-	public void destroyPlaylist(User user, Playlist playlist) {
+	public User destroyPlaylist(User user, Playlist playlist) {
+		
+		User managedUser = user;
+		Playlist managedPlaylist = playlist;
+		
+		System.out.println(managedUser);
+		System.out.println("*******************************************************"); 
+		
+		try {			
+			managedUser = em.find(User.class, user.getId());			
+			managedPlaylist = em.find(Playlist.class, playlist.getId());
+			
+			
+			System.out.println(managedUser);
+			
+			System.out.println("*******************************************************"); 
+			System.out.println("successful try"); 
+		} catch (NoResultException e) {
+			
+			System.out.println("*******************************************************"); 
+			System.out.println("unsuccessful try"); 
+			return managedUser;
+		}
 
-		if (user.getId() == playlist.getOwner().getId() && playlist != null) {
-
-			em.remove(playlist);
+		if (managedUser.getId() == managedPlaylist.getOwner().getId() 
+				&& managedPlaylist != null) {
+			
+			System.out.println(managedPlaylist.getId());
+			
+			String query = "Delete from Playlist where id=:id";
+			em.createQuery(query).setParameter("id", managedPlaylist.getId()).executeUpdate();
+//			em.remove(managedPlaylist);		
 			em.flush();
-
+			System.out.println("*******************************************************"); 
+			System.out.println("successful if"); 
 //			if (em.contains(playlist)) {
 //				return false;
 //			} else {
 //				return true;
 //			}
-		} else {
 			
-			user.getPlaylists().remove(playlist);
-						
+		} else  {
+			
+			managedUser.getPlaylists().remove(managedPlaylist);
+			em.persist(managedUser);
+			System.out.println("*******************************************************"); 
+			System.out.println("unsuccessful if"); 
 		}
+		
+		try {
+			String selectQuery = "SELECT u FROM User AS u JOIN FETCH u.playlists WHERE u.id = :id";
+			managedUser = em.createQuery(selectQuery, User.class).setParameter("id", user.getId()).getSingleResult();
+		} catch (NoResultException e) {
+
+			managedUser = em.find(User.class, user.getId());
+		}	
+		
+		return managedUser;
 	}
 
 	@Override
 	public User addPlaylistUser(User user, int playlistId) {
-
+		
 		Playlist managedPlaylist = em.find(Playlist.class, playlistId);
 		User managedUser = em.find(User.class, user.getId());
 
-		List<User> users = managedPlaylist.getUsers();
-		users.add(managedUser);
+//		List<User> users = managedPlaylist.getUsers();
+//		users.add(managedUser);
 
 		List<Playlist> playlists = managedUser.getPlaylists();
 		playlists.add(managedPlaylist);
 
 		managedUser.setPlaylists(playlists);
-		managedPlaylist.setUsers(users);
+//		managedPlaylist.setUsers(users);
 
-		em.persist(managedPlaylist);
+//		em.persist(managedPlaylist);
 		em.persist(managedUser);
 		em.flush();
 

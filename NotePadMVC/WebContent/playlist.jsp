@@ -45,7 +45,7 @@ pageEncoding="UTF-8"%>
 <h3>OR</h3>
 <a href="createNewAlbum.do">Create a New Album</a><br>
 <h3>OR</h3>
-<a href="deletePlaylist.do?id=${playlist.id}">Delete this Playlist</a><br>
+<a href="deletePlaylist.do?playlistId=${playlist.id}">Delete this Playlist</a><br>
 <h3>OR</h3>
 <a href="goToPad.do">Go Home</a><br>
 </div>
