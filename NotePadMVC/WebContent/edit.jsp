@@ -20,22 +20,13 @@
 		<div class="page-header">
 			<h1 class="notePadHeader">${album.title}</h1>
 			<br> <br>
-			<c:forEach items="${album.songs}" var="song">
-${song.title}   <a href="getAlbum.do?id=${song.id}">Add song to play
-					list</a>
-					<form action="editSongForm.do" >
-					<button id="button" name="id" value="${song.id }" type="submit">Edit Song</button><br>
-					<input type="hidden" name="albumId" value="${album.id }" />
-				</form>
+			<form action="editSong.do">
+				Title:<br> <input type="text" name="title" value="${song.title}"> <br>
+				<input type="hidden" name="songId" value="${song.id}"> 
 				<br>
-					<button action="deleteSong.do" id="button" type="submit">Remove Song(Cannot be
-						undone)</button><br>
-						
-
-			</c:forEach>
-			<a href="goToPad.do">Go Home</a> <br> 
-			<a href="getSongs.do">Back to Albums</a>
-
+				<br> <input type="submit" value="Submit">
+			</form>
+			<a href="getAlbum.do?id=${album.id}">Back to Album</a> 
 		</div>
 	</div>
 </body>
