@@ -2,6 +2,7 @@ package entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -31,12 +32,12 @@ public class User {
 	@Column(name = "admin_level")
 	@Enumerated(EnumType.STRING)
 	private AdminLevel adminLevel;
-	@ManyToMany
+	@ManyToMany(cascade= CascadeType.ALL)
 	@JoinTable(name = "playlist_user", 
 	joinColumns = @JoinColumn(name = "user_id"), 
 	inverseJoinColumns = @JoinColumn(name = "playlist_id"))
 	private List<Playlist> playlists;
-	@OneToMany(mappedBy = "owner")
+	@OneToMany(mappedBy = "owner", cascade= CascadeType.ALL)
 	private List<Playlist> ownedPlaylists;
 
 	public String getAlias() {
