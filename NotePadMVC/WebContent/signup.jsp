@@ -14,7 +14,7 @@ pageEncoding="UTF-8"%>
 </head>
 <body>
 <c:choose>
-<c:when test="${userNotFound}">
+<c:when test="${aliasExists}">
 <h3>
 <em>This User name already exists. Please pick a different User name and try again.</em>
 </h3>

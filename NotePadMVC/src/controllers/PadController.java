@@ -54,16 +54,17 @@ public class PadController{
 		return "addplaylist";
 	}
 
-	@RequestMapping(path="createPlaylist.do", method = RequestMethod.POST)
-	public String createPlaylist(Model model, Playlist playlist, @ModelAttribute("user") User user){
+	@RequestMapping(path="createPlaylist.do", params = "title", method = RequestMethod.POST)
+	public String createPlaylist(Model model, @ModelAttribute("title") String title,
+			@ModelAttribute("user") User user){
 
-		model.addAttribute("user", noteDAO.createPlaylist(playlist, user));
+		model.addAttribute("user", noteDAO.createPlaylist(title, user));
 		return "pad";
 	}
 
-	@RequestMapping(path="addExistingPlaylist.do", params = "id", method = RequestMethod.GET)
+	@RequestMapping(path="addExistingPlaylist.do", params = "playlistid", method = RequestMethod.GET)
 	public String addExistingPlaylist(Model model, @ModelAttribute("user") User user,
-			@RequestParam("id") int id){
+			@RequestParam("playlistid") int id){
 
 		model.addAttribute("user", noteDAO.addPlaylistUser(user, id));
 		return "pad";
@@ -76,15 +77,13 @@ public class PadController{
 		return "pad";
 	}
 	
-	@RequestMapping(path="deletePlaylist.do", params = "id", method = RequestMethod.GET)
+	@RequestMapping(path="deletePlaylist.do", params = "playlistId", method = RequestMethod.GET)
 	public String deletePlaylist(Model model, @ModelAttribute("user") User user,
-			@RequestParam("id") int id){
+			@RequestParam("playlistId") int playlistId){
 		
-		Playlist playlist = noteDAO.showPlaylist(id);
-		
-		noteDAO.destroyPlaylist(user, playlist);
-		
-		model.addAttribute("user", user);
+		Playlist playlist = noteDAO.showPlaylist(playlistId);
+				
+		model.addAttribute("user", noteDAO.destroyPlaylist(user, playlist));
 		
 //		if (!successfulDelete) {
 //			model.addAttribute("notTheOwner", true);

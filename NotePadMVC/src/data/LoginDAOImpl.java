@@ -46,14 +46,21 @@ public class LoginDAOImpl implements LoginDAO{
 	public User getUserByAliasAndPassword(String alias, String password) {
 		
 		try {
-			String query = "SELECT u FROM User AS u JOIN FETCH u.playlists WHERE"
+//			String query = "SELECT u FROM User AS u JOIN FETCH u.playlists WHERE"
+//					+ " u.password = :password AND u.alias = :alias";
+			String query = "SELECT u FROM User AS u WHERE"
 					+ " u.password = :password AND u.alias = :alias";
 			User user = em.createQuery(query, User.class).setParameter("password", password)
 					.setParameter("alias", alias).getSingleResult();
 			
+			System.out.println(user);
+			user.getPlaylists().size();
+			
+			
 			return user;
 		} catch (NoResultException e) {
-
+			
+			System.out.println(e);
 			return null;
 		}
 	}
