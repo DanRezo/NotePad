@@ -2,6 +2,7 @@ package entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,9 +22,9 @@ public class Album {
 	@Column(name = "release_year")
 	private int releaseYear;
 	private String picture;
-	@OneToMany(mappedBy = "album")
+	@OneToMany(mappedBy = "album", cascade= CascadeType.ALL)
 	private List<Song> songs;
-	@ManyToMany(mappedBy = "albums")
+	@ManyToMany(mappedBy = "albums", cascade= CascadeType.ALL)
 	private List<Artist> artists;
 
 	public List<Artist> getArtists() {
@@ -34,7 +35,7 @@ public class Album {
 		this.artists = artists;
 	}
 
-	@ManyToMany(mappedBy = "albums")
+	@ManyToMany(mappedBy = "albums", cascade=CascadeType.ALL)
 //	@Enumerated(EnumType.STRING)
 	private List<Genre> genres;
 	

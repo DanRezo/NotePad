@@ -25,15 +25,6 @@ public class PadDAOImpl  implements PadDAO{
 	private EntityManager em;
 
 //List
-	
-	
-	public int killsong(int id){
-	 String kill ="DELETE s FROM Song s WHERE s.id = :id";
-	 int song = em.createQuery(kill, Song.class).getFirstResult();
-	 return song;
-	 
-				
-	}
 
 	@Override
 	public List<Artist> listArtist(){
@@ -274,9 +265,10 @@ public class PadDAOImpl  implements PadDAO{
 	}
 
 	@Override
-	public boolean deleteAlbum(Album album) {
-		Album deadAlbum = em.find(Album.class, album.getId());
+	public boolean deleteAlbum(int album) {
+		Album deadAlbum = em.find(Album.class, album);
 		em.remove(deadAlbum);
+		
 		return em.contains(deadAlbum);
 	}
 
@@ -284,6 +276,7 @@ public class PadDAOImpl  implements PadDAO{
 		public boolean deleteSong(int id) {
 		Song deadSong = em.find(Song.class, id);
 		em.remove(deadSong);
+		em.flush();
 		return em.contains(deadSong);
 	}
 

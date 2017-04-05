@@ -55,10 +55,8 @@ public class PadController{
 	@RequestMapping(path="deleteAlbums.do", params = "albumId", method = RequestMethod.GET)
 	public String deleteAlbums(Model model, @ModelAttribute("user") User user, 
 			@RequestParam("albumId") int albumId){
-		
-		Album album = padDAO.showAlbum(albumId);
-		
-		padDAO.deleteAlbum(album);
+				
+		padDAO.deleteAlbum(albumId);
 		
 		model.addAttribute("user", user);
 		return "pad";
