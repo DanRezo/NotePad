@@ -88,20 +88,22 @@ public class NoteDAOImpl implements NoteDAO {
 	}
 
 	@Override
-	public boolean destroyPlaylist(User user, Playlist playlist) {
+	public void destroyPlaylist(User user, Playlist playlist) {
 
 		if (user.getId() == playlist.getOwner().getId() && playlist != null) {
 
 			em.remove(playlist);
 			em.flush();
 
-			if (em.contains(playlist)) {
-				return false;
-			} else {
-				return true;
-			}
+//			if (em.contains(playlist)) {
+//				return false;
+//			} else {
+//				return true;
+//			}
 		} else {
-			return false;
+			
+			user.getPlaylists().remove(playlist);
+						
 		}
 	}
 

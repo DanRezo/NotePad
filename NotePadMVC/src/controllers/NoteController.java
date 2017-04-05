@@ -29,6 +29,15 @@ public class NoteController{
 	@Autowired
 	NoteDAO noteDAO;
 	
+	@RequestMapping(path = "albumByArtist.do" , method = RequestMethod.GET)
+	public ModelAndView albumByArtist(@RequestParam("Artists") int Artists){
+		List<Album> albums = padDAO.getAlbumsByArtist(Artists);
+		mv.addObject("artist", Artists);
+		mv.addObject("albums", albums);
+		mv.setViewName("albumbyartist");
+		return mv;
+	}
+	
 	@RequestMapping(path = "artist.do", method = RequestMethod.GET)
 	public ModelAndView listArtist(){
 		List<Artist> artists = padDAO.listArtist();

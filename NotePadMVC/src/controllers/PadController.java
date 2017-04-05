@@ -75,7 +75,27 @@ public class PadController{
 		model.addAttribute("user", user);
 		return "pad";
 	}
-
+	
+	@RequestMapping(path="deletePlaylist.do", params = "id", method = RequestMethod.GET)
+	public String deletePlaylist(Model model, @ModelAttribute("user") User user,
+			@RequestParam("id") int id){
+		
+		Playlist playlist = noteDAO.showPlaylist(id);
+		
+		noteDAO.destroyPlaylist(user, playlist);
+		
+		model.addAttribute("user", user);
+		
+//		if (!successfulDelete) {
+//			model.addAttribute("notTheOwner", true);
+//			model.addAttribute("playlist", playlist);
+//			return "playlist";
+//		}
+		
+		
+		return "pad";
+	}
+	
 //	@RequestMapping(path="editPlaylist.do", method = RequestMethod.GET)
 //	public String editPlaylist() {
 //
