@@ -19,15 +19,24 @@ public interface PadDAO {
 	public List <Song> getSongsByAlbum(int id);
 	public List <Song> getSongsByArtist(int id);
 	public List <Song> getSongsByGenre(int id);
-	public List <Album> getAlbumsByArtist(int id); 
+	public List <Album> getAlbumsByArtist(int id);
 	public List <Album> getAlbumsByGenre(int id);
 	public List<Playlist> showPlaylistByUser(int id);
 	public Album getAlbumById(int i);
 	public Artist showArtist(int id);
 	public Album showAlbum(int id);
 	public Song showSong(int id);
+
 	public boolean removeArtist(Artist artist);
 	public boolean removeSong(Song song);
 	public boolean removeAlbum(Album album);
+
+	public boolean deleteArtist(int id);
+	public boolean deleteSong(Song song);
+	public boolean deleteAlbum(Album album);
+	List<Artist> listArtist();
+	List<Album> listAlbum();
+	List<Song> listSongs();
+
 
 }

@@ -21,5 +21,11 @@ pageEncoding="UTF-8"%>
 	<h2><a href="retrievePlaylist.do?id=${playlist.id}">${playlist.title}</a></h2>
 </c:forEach>
 </div>
+<form action="createPlaylist.do" method="POST">
+	<input type="text" name="title" placeholder="Title"/>
+	<button type="submit" class="btn btn-info btn-lg">New Playlist</button>
+</form>
+<h3>OR</h3>
+<a href="routeToAddExistingPlaylist.do">Subscribe to an existing Playlist</a>
 </body>
 </html>

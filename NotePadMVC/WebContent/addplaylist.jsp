@@ -13,34 +13,21 @@ pageEncoding="UTF-8"%>
 <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="npstyle.css"></head>
 <body>
-<div class="container">
 <div class="page-header">
-<h1 class="notePadHeader">${playlist.title}</h1>
-</div>
+<h1 class="notePadHeader">${user.alias}</h1>
 </div>
 <div class="container">
-<div class="notePadContainer">
-<c:choose>
-<c:when test="${!emptyPlaylist}">
-<table>
-<tr>
-<th>Song</th>
-<th>Album</th>
-</tr>
-<c:forEach var="song" items="${playlist.songs}">
-<tr>
-		<td>${song.title}</td>
-		<td>${song.album.title}</td>
-</tr>
+<c:forEach var="playlist" items="${playlists}">
+	<h2><a href="addExistingPlaylist.do?id=${playlist.id}">${playlist.title}</a></h2>
+	<ol>
+	<c:forEach var="song" items="${playlist.songs}">
+		<li>
+		${song.title}
+		${song.album.title}
+		</li>
+	</c:forEach>
+	</ol>
 </c:forEach>
-</table>
-</c:when>
-</c:choose>
-<a href="AddSongToPlaylist.do?id=${playlist.id}">Add a song to this Playlist</a>
-<h3>OR</h3>
-<a href="createNewAlbum.do">Create a New Album</a><br>
-<a href="goToPad.do">Go Home</a><br>
-</div>
 </div>
 </body>
 </html>

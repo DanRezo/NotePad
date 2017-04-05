@@ -3,7 +3,9 @@ package data;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,29 +24,50 @@ public class NoteDAOImpl implements NoteDAO {
 	public Playlist addSongToPlaylist(Playlist playlist, Song song) {
 		List<Song> songs;
 		Playlist playList1 = playlist;
-	    em.getTransaction().begin();
-	    songs = playlist.getSongs();
-	    songs.add(song);
-	    playList1.setSongs(songs);
-	    em.persist(playList1);
-	    em.flush();
+		em.getTransaction().begin();
+		songs = playlist.getSongs();
+		songs.add(song);
+		playList1.setSongs(songs);
+		em.persist(playList1);
+		em.flush();
 
-	    return playList1;
+		return playList1;
 	}
 
 	@Override
 	public Playlist showPlaylist(int id) {
-		Playlist yourPlayList = em.find(Playlist.class, id);
-		em.flush();
-		return yourPlayList;
+		
+		try {
+			String query = "SELECT p FROM Playlist AS p JOIN FETCH p.songs WHERE p.id = :id";
+			
+			Playlist playlist = em.createQuery(query, Playlist.class).setParameter("id", id)
+					.getSingleResult();
+
+			return playlist;
+		} catch (NoResultException e) {
+			return em.find(Playlist.class, id);
+		}
 	}
 
 	@Override
-	public Playlist createPlaylist(Playlist playlist) {
+	public User createPlaylist(Playlist playlist, User user) {
+
+		User managedUser = em.find(User.class, user.getId());
+
+		playlist.setOwner(managedUser);
+		managedUser.getOwnedPlaylists().add(playlist);
+		managedUser.getPlaylists().add(playlist);
+
 		em.persist(playlist);
+		em.persist(managedUser);
 		em.flush();
 
-		return null;
+		String query = "SELECT u FROM User AS u JOIN FETCH u.playlists WHERE u.id = :id";
+
+		User userWithPlaylists = em.createQuery(query, User.class).setParameter("id", managedUser.getId())
+				.getSingleResult();
+
+		return userWithPlaylists;
 	}
 
 	@Override
@@ -83,19 +106,25 @@ public class NoteDAOImpl implements NoteDAO {
 	}
 
 	@Override
-	public Playlist addPlaylistUser(User user, Playlist playlist) {
+	public User addPlaylistUser(User user, int playlistId) {
 
-		Playlist managed = em.find(Playlist.class, playlist.getId());
+		Playlist managedPlaylist = em.find(Playlist.class, playlistId);
+		User managedUser = em.find(User.class, user.getId());
 
-		List<User> users = managed.getUsers();
-		users.add(user);
+		List<User> users = managedPlaylist.getUsers();
+		users.add(managedUser);
 
-		managed.setUsers(users);
+		List<Playlist> playlists = managedUser.getPlaylists();
+		playlists.add(managedPlaylist);
 
-		em.persist(managed);
+		managedUser.setPlaylists(playlists);
+		managedPlaylist.setUsers(users);
+
+		em.persist(managedPlaylist);
+		em.persist(managedUser);
 		em.flush();
 
-		return managed;
+		return managedUser;
 	}
 
 	@Override
@@ -106,7 +135,7 @@ public class NoteDAOImpl implements NoteDAO {
 		List<User> users = managed.getUsers();
 		users.remove(user);
 
-		if(users.contains(user)) {
+		if (users.contains(user)) {
 			return null;
 		}
 
@@ -116,5 +145,15 @@ public class NoteDAOImpl implements NoteDAO {
 		em.flush();
 
 		return managed;
+	}
+
+	@Override
+	public List<Playlist> showAllPlaylists() {
+
+		String query = "SELECT DISTINCT p FROM Playlist AS p JOIN FETCH p.songs";
+
+		List<Playlist> playlists = em.createQuery(query, Playlist.class).getResultList();
+
+		return playlists;
 	}
 }

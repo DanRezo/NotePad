@@ -15,32 +15,5 @@ pageEncoding="UTF-8"%>
 <body>
 <div class="container">
 <div class="page-header">
-<h1 class="notePadHeader">${playlist.title}</h1>
+<h1 class="notePadHeader">All Artists All the time</h1>
 </div>
-</div>
-<div class="container">
-<div class="notePadContainer">
-<c:choose>
-<c:when test="${!emptyPlaylist}">
-<table>
-<tr>
-<th>Song</th>
-<th>Album</th>
-</tr>
-<c:forEach var="song" items="${playlist.songs}">
-<tr>
-		<td>${song.title}</td>
-		<td>${song.album.title}</td>
-</tr>
-</c:forEach>
-</table>
-</c:when>
-</c:choose>
-<a href="AddSongToPlaylist.do?id=${playlist.id}">Add a song to this Playlist</a>
-<h3>OR</h3>
-<a href="createNewAlbum.do">Create a New Album</a><br>
-<a href="goToPad.do">Go Home</a><br>
-</div>
-</div>
-</body>
-</html>
