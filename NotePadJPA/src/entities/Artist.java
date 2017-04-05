@@ -2,6 +2,7 @@ package entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +19,7 @@ public class Artist {
 	private int id;
 	private String name;
 	private String picture;
-	@ManyToMany
+	@ManyToMany(cascade= CascadeType.ALL)
 	@JoinTable(name = "album_artist", 
 	joinColumns = @JoinColumn(name = "artist_id"), 
 	inverseJoinColumns = @JoinColumn(name = "album_id"))

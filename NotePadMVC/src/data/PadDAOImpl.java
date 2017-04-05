@@ -265,9 +265,10 @@ public class PadDAOImpl  implements PadDAO{
 	}
 
 	@Override
-	public boolean deleteAlbum(Album album) {
-		Album deadAlbum = em.find(Album.class, album.getId());
+	public boolean deleteAlbum(int album) {
+		Album deadAlbum = em.find(Album.class, album);
 		em.remove(deadAlbum);
+		
 		return em.contains(deadAlbum);
 	}
 
@@ -275,6 +276,7 @@ public class PadDAOImpl  implements PadDAO{
 		public boolean deleteSong(int id) {
 		Song deadSong = em.find(Song.class, id);
 		em.remove(deadSong);
+		em.flush();
 		return em.contains(deadSong);
 	}
 

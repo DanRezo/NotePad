@@ -29,43 +29,35 @@
 			<h4>
 				<button id="bar" type="submit">Delete that sucker!</button>
 			</h4>
-			<br>
-			<br>
-			<br>
+			<br> <br> <br>
 		</form>
-				
-				<form action="deleteSong.do">
-			<select name="song">
-		<c:forEach items="${albums}" var="album">
+
+		<form action="deleteAlbum.do">
+			<select name="album">
+				<c:forEach items="${albums}" var="album">
 					<option value="${album.id}">${album.title}</option>
 				</c:forEach>
 			</select>
 			<h4>
 				<button id="bar" type="submit">Delete that album!</button>
 			</h4>
-			<br>
-			<br>
-			<br>
+			<br> <br> <br>
 		</form>
-		<c:forEach items="${album.songs}" var="song">
-			<form action="deleteSong.do">
-				<button id="button" name="id" value="${song.id}" type="submit">Remove
-					Song</button>
-				<br>
-			</form>
-		</c:forEach>
-		<br>
-		<h4>
-			<c:forEach items="${album}" var="album">
-				<form action="deleteAlbum.do">
-					<button id="button" name="id" value="${song.id}" type="submit">Remove
-						Album</button>
-					<br>
-				</form>
-			</c:forEach>
-			<h4>
 
-				<a href="goToPad.do" class="btn btn-info btn-lg" role="button">Go
-					Home</a>
+
+		<form action="deleteSong.do">
+			<select name="id">
+				<c:forEach items="${songs}" var="song">
+					<option value="${song.id}">${song.title}</option>
+				</c:forEach>
+			</select>
+			<h4>
+				<button id="bar" type="submit">Delete that song!</button>
+			</h4>
+			<br> <br> <br>
+		</form>
+
+		<br> <a href="goToPad.do" class="btn btn-info btn-lg"
+			role="button">Go Home</a>
 	</div>
 </body>

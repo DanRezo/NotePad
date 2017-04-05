@@ -66,9 +66,12 @@ public class NoteController{
 	public ModelAndView list(){
 		List<Artist> artists = padDAO.listArtist();
 		List<Album> albums = padDAO.listAlbum();
+		List<Song> songs = padDAO.listSongs();
+		mv.addObject("songs", songs);
 		mv.addObject("artists", artists);
 		mv.addObject("albums" , albums);
 		mv.setViewName("admin");
+		
 		return mv;
 	}
 	
@@ -107,12 +110,14 @@ public class NoteController{
 	}
 
 	@RequestMapping(path = "deleteAlbum.do", method = RequestMethod.GET)
-	public ModelAndView ModelAndView(Album album){
+	public ModelAndView ModelAndView(@RequestParam("album") int album){
 		if (padDAO.deleteAlbum(album))
-		mv.setViewName("successalbum");
+		   mv.setViewName("failure");
 		else{
-			mv.setViewName("failure");
+			mv.setViewName("successalbum");
 		}
+		
+		System.out.println("SUCCESS DELETE");
 		return mv;
 	}
 
