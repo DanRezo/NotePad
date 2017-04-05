@@ -22,7 +22,7 @@ public class Playlist {
 	private List<User> users;
 	@ManyToMany(mappedBy = "playlists", cascade= CascadeType.ALL)
 	private List<Song> songs;
-	@ManyToOne
+	@ManyToOne(cascade= CascadeType.ALL)
 	@JoinColumn(name = "owner_id")
 	private User owner;
 

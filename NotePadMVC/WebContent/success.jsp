@@ -22,5 +22,5 @@
 		</div>
 		
 			<h4>
-			<a href="pad.jsp" class="btn btn-info btn-med" role="button">click here to return to your pad</a>
+			<a href="pad.jsp" class="btn btn-info btn-med">click here to return to your pad</a>
 		</h4>
