@@ -41,5 +41,6 @@ public interface PadDAO {
 	public Album getSongsByAlbumById(int id);
 	Song getSongById(int id);
 
-
+	public Album addEverything(String songTitle, String artistName, 
+			String albumTitle, int albumYear, String genre);
 }

@@ -1,9 +1,11 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +17,7 @@ import data.NoteDAO;
 import data.PadDAO;
 import entities.Album;
 import entities.Artist;
+import entities.Category;
 import entities.Song;
 import entities.User;
 
@@ -107,14 +110,32 @@ public class NoteController{
 //		mv.addObject("newSong", newSong);
 //		return "song";
 //	}
-//
-//	@RequestMapping(path = "NewSongNewAlbum.do" , method = RequestMethod.GET)
-//	public String createNewSongWithNewAlbum(Song song){
-//		Song newSong = padDAO.createNewSongWithNewAlbum(song);
-//		mv.addObject("newSong", newSong);
-//		return "song";
-//	}
-//
+
+	@RequestMapping(path = "NewSongNewAlbum.do" , method = RequestMethod.GET)
+	public String routeToCreateNewSongWithNewAlbum(Model model, @ModelAttribute("user") User user){
+		
+		List<String> genres = new ArrayList<>();
+		
+		for(Category c : Category.values()) {
+			genres.add(c.toString());
+		}
+		
+		model.addAttribute("genres", genres);
+		model.addAttribute("user", user);
+		return "create";
+	}
+	
+	@RequestMapping(path = "createstuff.do", method = RequestMethod.POST)
+	public String createNewSongWithNewAlbum(Model model, @ModelAttribute("user") User user,
+			String songTitle, String artistName, String albumTitle, int albumYear, 
+			String genre){
+		
+		Album album = padDAO.addEverything(songTitle, artistName, albumTitle, albumYear, genre);
+		
+		model.addAttribute("album", album);
+		return "album";
+	}
+
 	@RequestMapping(path = "editSongForm.do" , method = RequestMethod.GET)
 	public ModelAndView editSongForm(@RequestParam("id") int id,@RequestParam("albumId") int albumId){
 		ModelAndView mv = new ModelAndView();

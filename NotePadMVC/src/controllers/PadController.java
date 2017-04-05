@@ -1,7 +1,5 @@
 package controllers;
 
-import java.util.List;
-
 import org.hibernate.LazyInitializationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,8 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import data.NoteDAO;
 import data.PadDAO;
+import entities.Album;
 import entities.Playlist;
-import entities.Song;
 import entities.User;
 
 @Controller
@@ -52,6 +50,18 @@ public class PadController{
 		model.addAttribute("user", user);
 		model.addAttribute("playlists", noteDAO.showAllPlaylists());
 		return "addplaylist";
+	}
+	
+	@RequestMapping(path="deleteAlbums.do", params = "albumId", method = RequestMethod.GET)
+	public String deleteAlbums(Model model, @ModelAttribute("user") User user, 
+			@RequestParam("albumId") int albumId){
+		
+		Album album = padDAO.showAlbum(albumId);
+		
+		padDAO.deleteAlbum(album);
+		
+		model.addAttribute("user", user);
+		return "pad";
 	}
 
 	@RequestMapping(path="createPlaylist.do", params = "title", method = RequestMethod.POST)

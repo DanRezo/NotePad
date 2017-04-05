@@ -300,4 +300,62 @@ public class PadDAOImpl  implements PadDAO{
 		Album album = em.createQuery(queryString, Album.class).setParameter("id", id).getSingleResult();
 		return album;
 	}
+
+	@Override
+	public Album addEverything(String songTitle, String artistName,
+			String albumTitle, int albumYear, String genre) {
+
+		Song song = new Song();
+		song.setTitle(songTitle);
+		
+		Album album = null;
+		
+		try {
+			String queryString = "Select a From Album AS a WHERE a.title = :title";
+			album = em.createQuery(queryString, Album.class)
+					.setParameter("title", albumTitle).getSingleResult();
+			song.setAlbum(album);
+			
+			album.getSongs().size();
+			
+			em.persist(song);
+			em.flush();
+			
+		} catch (NoResultException e) {
+			
+			album = new Album();
+			album.setTitle(albumTitle);
+			album.setReleaseYear(albumYear);
+			
+			List<Album> albumList = new ArrayList<Album>();
+			albumList.add(album);
+			
+			Artist newArtist = new Artist();
+			newArtist.setName(artistName);
+			List<Artist> artistList = new ArrayList<Artist>();
+			artistList.add(newArtist);
+			album.setArtists(artistList);
+			
+			newArtist.setAlbums(albumList);
+			
+			Genre newGenre = new Genre();
+//			newGenre.setGenre(entities.Category.valueOf(genre));
+			newGenre.setGenre(entities.Category.COUNTRY);
+			List<Genre> genreList = new ArrayList<Genre>();
+			genreList.add(newGenre);
+			album.setGenres(genreList);
+			
+			List<Song> songList = new ArrayList<Song>();
+			songList.add(song);
+			
+			album.setSongs(songList);
+//			song.setAlbum(album);
+			
+			em.persist(album);
+			em.persist(song);
+			em.flush();
+		}
+		
+		return album;
+	}
 }

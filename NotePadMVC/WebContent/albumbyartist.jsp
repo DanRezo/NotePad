@@ -22,7 +22,7 @@
 			<br><br>
 					<c:forEach var="album" items="${albums}">
 					<h4><font color="pink"><a href="getAlbum.do?id=${album.id}"> ${album.title}</a></font></h4>
-					</c:forEach>
-		</div>
+					<a href="deleteAlbums.do?albumId=${album.id}" class="btn btn-info btn-lg" role="button">Delete</a>					</c:forEach>
+					</div>
 	</div>
 </body>
