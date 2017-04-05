@@ -20,6 +20,10 @@ body {
    background: rgba(226, 229, 255, 0.5);
 }
 
+.notePadTable  {
+	padding: 3px 3px 3px 3px;
+}
+
 .signIn {
 
 }

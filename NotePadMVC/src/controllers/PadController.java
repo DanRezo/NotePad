@@ -1,5 +1,8 @@
 package controllers;
 
+import java.util.List;
+
+import org.hibernate.LazyInitializationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,14 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import data.NoteDAO;
 import data.PadDAO;
-import entities.Album;
-import entities.Artist;
 import entities.Playlist;
 import entities.Song;
 import entities.User;
 
 @Controller
-@SessionAttributes({"user"})
+@SessionAttributes({"user", "playlist"})
 public class PadController{
 	ModelAndView mv = new ModelAndView();
 
@@ -30,9 +31,15 @@ public class PadController{
 	NoteDAO noteDAO;
 
 	@RequestMapping(value="retrievePlaylist.do", params = "id", method = RequestMethod.GET)
-	public String test(@ModelAttribute("user") User user, @RequestParam("id") int id, Model model){
+	public String test(@RequestParam("id") int id, Model model){
 
-		model.addAttribute("playlist", noteDAO.showPlaylist(id));
+		Playlist playlist = noteDAO.showPlaylist(id);
+		
+		if (playlist.getSongs() == null) {
+			model.addAttribute("emptyPlaylist", true);
+		}
+		
+		model.addAttribute("playlist", playlist);
 
 		return "playlist";
 	}
@@ -57,6 +64,13 @@ public class PadController{
 			@RequestParam("id") int id){
 
 		model.addAttribute("user", noteDAO.addPlaylistUser(user, id));
+		return "pad";
+	}
+	
+	@RequestMapping(path="goToPad.do", method = RequestMethod.GET)
+	public String goToPad(Model model, @ModelAttribute("user") User user){
+		
+		model.addAttribute("user", user);
 		return "pad";
 	}
 
