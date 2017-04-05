@@ -155,7 +155,7 @@ public class PadDAOImpl  implements PadDAO{
 	public List <Album> getAlbumsByArtist(int id) {
 		String queryString = "Select a From Artist a JOIN FETCH a.albums where a.id = :id ";
 		Artist artist = em.createQuery(queryString, Artist.class).setParameter("id", id).getSingleResult();
-		return artist.getAlbums();	
+		return (List<Album>) artist.getAlbums();	
 		}
 	
 	@Override
@@ -213,6 +213,20 @@ public class PadDAOImpl  implements PadDAO{
 		Song deadSong = em.find(Song.class, song.getId());
 		em.remove(deadSong);
 		return em.contains(deadSong);	
+	}
+
+	@Override
+	public List<Artist> getArtists() {
+		String queryString = "Select DISTINCT a From Artist a JOIN FETCH a.albums";
+		List<Artist> artists = em.createQuery(queryString, Artist.class).getResultList();
+		return artists;
+	}
+
+	@Override
+	public Album getSongsByAlbumById(int id) {
+		String queryString = "Select a From Album a JOIN FETCH a.songs where a.id= :id";
+		Album album = em.createQuery(queryString, Album.class).setParameter("id", id).getSingleResult();
+		return album;
 	}
 }
 

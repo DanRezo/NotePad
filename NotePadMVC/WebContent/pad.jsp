@@ -27,5 +27,6 @@ pageEncoding="UTF-8"%>
 </form>
 <h3>OR</h3>
 <a href="routeToAddExistingPlaylist.do">Subscribe to an existing Playlist</a>
+<div><a href="getSongs.do">Get Songs</a></div>
 </body>
 </html>
