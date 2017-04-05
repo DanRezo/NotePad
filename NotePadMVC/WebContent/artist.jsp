@@ -46,7 +46,7 @@
 			<br><br><br>
 		</form>
 		<h4>
-			<a href="createAlbum.do" class="btn btn-info btn-med"  role="button">or
+			<a href="NewSongNewAlbum.do" class="btn btn-info btn-med"  role="button">or
 				click here to add a new Artist to the database</a>
 		</h4>
 		<a href="goToPad.do" class="btn btn-info btn-lg" role="button">Go Home</a>
