@@ -120,7 +120,6 @@ public class NoteController{
 		ModelAndView mv = new ModelAndView();
 		Song newSong = padDAO.getSongById(id);
 		Album album = padDAO.getAlbumById(albumId);
-		System.out.println("**************" + newSong);
 		mv.setViewName("edit");
 		mv.addObject("song", newSong);
 		mv.addObject("album", album);
@@ -133,11 +132,12 @@ public class NoteController{
 		mv.addObject("newSong", newSong);
 		return "edit";
 	}
-//
-//	@RequestMapping(path = "deleteSong.do", method = RequestMethod.GET)
-//	public String deleteSong(Song song){
-//		padDAO.deleteSong(song);
-//		return "song";
-//	}
+
+	@RequestMapping(path = "deleteSong.do", method = RequestMethod.GET)
+	public ModelAndView deleteSong(@RequestParam("id") int id){
+		padDAO.deleteSong(id);
+		mv.setViewName("album");
+		return mv;
+	}
 
 }

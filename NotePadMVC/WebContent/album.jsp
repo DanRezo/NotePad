@@ -28,8 +28,10 @@ ${song.title}   <a href="getAlbum.do?id=${song.id}">Add song to play
 					<input type="hidden" name="albumId" value="${album.id }" />
 				</form>
 				<br>
-					<button action="deleteSong.do" id="button" type="submit">Remove Song(Cannot be
+				<form action="deleteSong.do" >
+					<button id="button"  name="id"  value="${song.id}"type="submit">Remove Song(Cannot be
 						undone)</button><br>
+						</form>
 						
 
 			</c:forEach>
