@@ -35,8 +35,10 @@ public class PadController{
 
 		Playlist playlist = noteDAO.showPlaylist(id);
 		
-		if (playlist.getSongs() == null) {
-			model.addAttribute("emptyPlaylist", true);
+		try {
+			playlist.getSongs().size();
+		} catch (LazyInitializationException e) {
+			model.addAttribute("emptyPlaylist", true);	
 		}
 		
 		model.addAttribute("playlist", playlist);
