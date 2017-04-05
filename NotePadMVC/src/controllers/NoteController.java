@@ -29,6 +29,15 @@ public class NoteController{
 	@Autowired
 	NoteDAO noteDAO;
 	
+	@RequestMapping(path = "albumByArtist.do" , method = RequestMethod.GET)
+	public ModelAndView albumByArtist(@RequestParam("Artists") int Artists){
+		List<Album> albums = padDAO.getAlbumsByArtist(Artists);
+		mv.addObject("artist", Artists);
+		mv.addObject("albums", albums);
+		mv.setViewName("albumbyartist");
+		return mv;
+	}
+	
 	@RequestMapping(path = "artist.do", method = RequestMethod.GET)
 	public ModelAndView listArtist(){
 		List<Artist> artists = padDAO.listArtist();
@@ -106,17 +115,29 @@ public class NoteController{
 //		return "song";
 //	}
 //
-//	@RequestMapping(path = "editSong.do" , method = RequestMethod.GET)
-//	public String editSong(int id, Song song){
-//		Song newSong = padDAO.edit(id, song);
-//		mv.addObject("newSong", newSong);
-//		return "song";
-//	}
-//
-//	@RequestMapping(path = "deleteSong.do", method = RequestMethod.GET)
-//	public String deleteSong(Song song){
-//		padDAO.deleteSong(song);
-//		return "song";
-//	}
+	@RequestMapping(path = "editSongForm.do" , method = RequestMethod.GET)
+	public ModelAndView editSongForm(@RequestParam("id") int id,@RequestParam("albumId") int albumId){
+		ModelAndView mv = new ModelAndView();
+		Song newSong = padDAO.getSongById(id);
+		Album album = padDAO.getAlbumById(albumId);
+		mv.setViewName("edit");
+		mv.addObject("song", newSong);
+		mv.addObject("album", album);
+		return mv;
+	}
+
+	@RequestMapping(path = "editSong.do" , method = RequestMethod.GET)
+	public String editSong(@RequestParam("songId") int id, Song song){
+		Song newSong = padDAO.edit(id, song);
+		mv.addObject("newSong", newSong);
+		return "edit";
+	}
+
+	@RequestMapping(path = "deleteSong.do", method = RequestMethod.GET)
+	public ModelAndView deleteSong(@RequestParam("id") int id){
+		padDAO.deleteSong(id);
+		mv.setViewName("album");
+		return mv;
+	}
 
 }

@@ -20,7 +20,7 @@
 		<div class="page-header">
 			<h1 class="notePadHeader">All Artists All the time</h1>
 		</div>
-		<form action="albumArtist.do">
+		<form action="albumByArtist.do">
 			<select name="Artists">
 				<c:forEach var="artist" items="${artists}">
 					<option value="${artist.id}">${artist.name}</option>
@@ -49,4 +49,5 @@
 			<a href="createAlbum.do" class="btn btn-info btn-med"  role="button">or
 				click here to add a new Artist to the database</a>
 		</h4>
+		<a href="goToPad.do" class="btn btn-info btn-lg" role="button">Go Home</a>
 	</div>

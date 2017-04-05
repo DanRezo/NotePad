@@ -32,13 +32,14 @@ public interface PadDAO {
 	public boolean removeAlbum(Album album);
 
 	public boolean deleteArtist(int id);
-	public boolean deleteSong(Song song);
+	public boolean deleteSong(int id);
 	public boolean deleteAlbum(Album album);
 	List<Artist> listArtist();
 	List<Album> listAlbum();
 	List<Song> listSongs();
 	public List<Artist> getArtists();
 	public Album getSongsByAlbumById(int id);
+	Song getSongById(int id);
 
 
 }
