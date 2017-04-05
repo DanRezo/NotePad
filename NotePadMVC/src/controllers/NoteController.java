@@ -135,8 +135,11 @@ public class NoteController{
 
 	@RequestMapping(path = "deleteSong.do", method = RequestMethod.GET)
 	public ModelAndView deleteSong(@RequestParam("id") int id){
-		padDAO.deleteSong(id);
-		mv.setViewName("album");
+		if (padDAO.deleteSong(id))
+		mv.setViewName("failure");
+		else{
+		mv.setViewName("sucesssong");
+		}
 		return mv;
 	}
 
