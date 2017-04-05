@@ -26,7 +26,7 @@
 				<br>
 				<br> <input type="submit" value="Submit">
 			</form>
-			<a href="getAlbum.do?id=${album.id}">Back to Album</a> <br>
+			<a href="getAlbum.do?id=${album.id}">Back to Album</a> 
 		</div>
 	</div>
 </body>
