@@ -62,8 +62,16 @@ public class NoteController{
 		return mv;
 	}
 	
+	@RequestMapping(path="admin.do", method = RequestMethod.GET)
+	public ModelAndView list(){
+		List<Artist> artists = padDAO.listArtist();
+		List<Album> albums = padDAO.listAlbum();
+		mv.addObject("artists", artists);
+		mv.addObject("albums" , albums);
+		mv.setViewName("admin");
+		return mv;
+	}
 	
-
 	@RequestMapping(path = "newArtist.do", method = RequestMethod.GET)
 	public ModelAndView createArtist(){
 //		Artist newArtist = padDAO.createNewArtist(artist);
@@ -82,39 +90,40 @@ public class NoteController{
 
 	}
 
-//	@RequestMapping(path = "newAlbum.do", method = RequestMethod.GET)
-//	public String createNewAlbum(Album album){
-//		Album newAlbum = padDAO.createNewAlbum(album);
-//		mv.addObject("newAlbum", newAlbum);
-//		return "album";
-//	}
-//	@RequestMapping(path = "editAlbum.do", method = RequestMethod.GET)
-//	public String edit(int id, Album album){
-//		Album newAlbum = padDAO.edit(id, album);
-//		mv.addObject("newAlbum", newAlbum);
-//		return "album";
-//	}
-//
-//	@RequestMapping(path = "deleteAlbum.do", method = RequestMethod.GET)
-//	public String deleteAlbum(Album album){
-//		padDAO.deleteAlbum(album);
-//		return "album";
-//	}
-//
-//	@RequestMapping(path = "newSongExistingAlbum.do" , method = RequestMethod.GET)
-//	public String createNewSongWithExistingAlbum(Song song, Album album){
-//		Song newSong = padDAO.createNewSongWithExistingAlbum(song, album);
-//		mv.addObject("newSong", newSong);
-//		return "song";
-//	}
-//
-//	@RequestMapping(path = "NewSongNewAlbum.do" , method = RequestMethod.GET)
-//	public String createNewSongWithNewAlbum(Song song){
-//		Song newSong = padDAO.createNewSongWithNewAlbum(song);
-//		mv.addObject("newSong", newSong);
-//		return "song";
-//	}
-//
+	@RequestMapping(path = "newAlbum.do", method = RequestMethod.GET)
+	public ModelAndView createNewAlbum(Album album){
+		Album newAlbum = padDAO.createNewAlbum(album);
+		mv.addObject("newAlbum", newAlbum);
+		mv.setViewName("album");
+		return mv;
+	}
+	
+	@RequestMapping(path = "editAlbum.do", method = RequestMethod.GET)
+	public ModelAndView edit(int id, Album album){
+		Album newAlbum = padDAO.edit(id, album);
+		mv.addObject("newAlbum", newAlbum);
+		mv.setViewName("album");
+		return mv;
+	}
+
+	@RequestMapping(path = "deleteAlbum.do", method = RequestMethod.GET)
+	public ModelAndView ModelAndView(Album album){
+		if (padDAO.deleteAlbum(album))
+		mv.setViewName("successalbum");
+		else{
+			mv.setViewName("failure");
+		}
+		return mv;
+	}
+
+	@RequestMapping(path = "newSongExistingAlbum.do" , method = RequestMethod.GET)
+	public ModelAndView createNewSongWithExistingAlbum(Song song, Album album){
+		Song newSong = padDAO.createNewSongWithExistingAlbum(song, album);
+		mv.addObject("newSong", newSong);
+		mv.setViewName("song");
+		return mv;
+	}
+
 	@RequestMapping(path = "editSongForm.do" , method = RequestMethod.GET)
 	public ModelAndView editSongForm(@RequestParam("id") int id,@RequestParam("albumId") int albumId){
 		ModelAndView mv = new ModelAndView();
