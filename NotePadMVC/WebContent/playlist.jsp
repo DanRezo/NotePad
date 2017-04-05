@@ -20,6 +20,11 @@ pageEncoding="UTF-8"%>
 </div>
 <div class="container">
 <div class="notePadContainer">
+<%-- <c:choose>
+<c:when test="${notTheOwner}">
+<em>You can't delete this playlist.</em>
+</c:when>
+</c:choose> --%>
 <c:choose>
 <c:when test="${!emptyPlaylist}">
 <table>
@@ -39,6 +44,9 @@ pageEncoding="UTF-8"%>
 <a href="AddSongToPlaylist.do?id=${playlist.id}">Add a song to this Playlist</a>
 <h3>OR</h3>
 <a href="createNewAlbum.do">Create a New Album</a><br>
+<h3>OR</h3>
+<a href="deletePlaylist.do?id=${playlist.id}">Delete this Playlist</a><br>
+<h3>OR</h3>
 <a href="goToPad.do">Go Home</a><br>
 </div>
 </div>

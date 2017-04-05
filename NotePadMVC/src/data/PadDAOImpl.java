@@ -249,6 +249,7 @@ public class PadDAOImpl  implements PadDAO{
 
 			return false;
 		}
+	}
 
 	public boolean deleteArtist(int id) {
 		Artist deadArtist = em.find(Artist.class, id);
