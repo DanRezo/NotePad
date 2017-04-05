@@ -104,12 +104,19 @@ public class PadDAOImpl  implements PadDAO{
 
 		return alb;
 	}
+	
+	@Override
+	public Song getSongById(int id){
+		Song song = em.find(Song.class, id);
+		
+		
+		return song;
+	}
 
 	@Override
 	public Song edit(int id, Song song){
 		Song s = em.find(Song.class, id);
 
-		s.setAlbum(song.getAlbum());
 		s.setTitle(song.getTitle());
 		return s;
 

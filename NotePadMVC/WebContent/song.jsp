@@ -17,7 +17,7 @@ pageEncoding="UTF-8"%>
 <div class="page-header">
 
 <c:forEach items="${artists}" var="artist">
-<h2 class="notePadHeader">${artist.name }</h1>
+<h2 class="notePadHeader">${artist.name }</h2>
 <c:forEach items="${artist.albums }" var="album">
 <br>
 <a href="getAlbum.do?id=${album.id}">${album.title}</a>
@@ -27,3 +27,7 @@ pageEncoding="UTF-8"%>
 <br>
 </c:forEach>
 </div>
+<a href="goToPad.do">Go Home</a><br>
+</div>
+</body>
+</html>

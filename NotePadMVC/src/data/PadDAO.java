@@ -39,6 +39,7 @@ public interface PadDAO {
 	List<Song> listSongs();
 	public List<Artist> getArtists();
 	public Album getSongsByAlbumById(int id);
+	Song getSongById(int id);
 
 
 }
