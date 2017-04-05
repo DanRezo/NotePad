@@ -37,11 +37,19 @@ public class NoteController{
 		return mv;
 	}
 
-	@RequestMapping(path="song.do", params = "Artists", method = RequestMethod.GET)
-	public ModelAndView listSong(@RequestParam("Artists") int Artists){
-		List<Song> songs = padDAO.getSongsByArtist(Artists);
-		mv.addObject("Songs", songs);
+	@RequestMapping(path="getSongs.do", method = RequestMethod.GET)
+	public ModelAndView listSong(){
+		List<Artist> artists = padDAO.getArtists();
+		mv.addObject("artists", artists);
 		mv.setViewName("song");
+		return mv;
+	}
+	
+	@RequestMapping(path="getAlbum.do", method = RequestMethod.GET)
+	public ModelAndView listSong(@RequestParam("id") int id){
+		Album album = padDAO.getSongsByAlbumById(id);
+		mv.addObject("album", album);
+		mv.setViewName("album");
 		return mv;
 	}
 	

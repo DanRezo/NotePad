@@ -15,5 +15,11 @@ pageEncoding="UTF-8"%>
 <body>
 <div class="container">
 <div class="page-header">
-<h1 class="notePadHeader">All Artists All the time</h1>
+<h1 class="notePadHeader">${album.title}</h1>
+<br><br>
+<c:forEach items="${album.songs}" var="song">
+${song.title}   <a href="getAlbum.do?id=${song.id}">Add song to playlist</a> 
+<br>
+</c:forEach>
+
 </div>

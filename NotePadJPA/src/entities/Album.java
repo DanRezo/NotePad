@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,6 +23,16 @@ public class Album {
 	private String picture;
 	@OneToMany(mappedBy = "album")
 	private List<Song> songs;
+	@ManyToMany(mappedBy = "albums")
+	private List<Artist> artists;
+
+	public List<Artist> getArtists() {
+		return artists;
+	}
+
+	public void setArtists(List<Artist> artists) {
+		this.artists = artists;
+	}
 
 	@ManyToMany(mappedBy = "albums")
 //	@Enumerated(EnumType.STRING)
