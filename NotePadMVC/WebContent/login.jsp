@@ -17,8 +17,9 @@ pageEncoding="UTF-8"%>
 
 <div class="container">
 <div class="page-header">
-<h1 class="notePadHeader">Welcome to NotePad</h1>
+<h1 class="notePadHeader">Welcome to <strong>NotePad</strong></h1>
 </div>
+
 <div class="loginForm">
 <div class="jumbotron notePadContainer">
 <c:choose>
@@ -33,7 +34,7 @@ pageEncoding="UTF-8"%>
 <button type="submit" class="btn btn-info btn-lg">Login</button>
 </div>
 </form>
-<br/>
+<br>
 </c:when>
 <c:otherwise>
 <form action="login.do" method="POST">
