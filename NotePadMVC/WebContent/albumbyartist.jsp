@@ -19,12 +19,16 @@
 	<div class="container">
 		<div class="page-header">
 			<h1 class="notePadHeader">Albums</h1>
-			<br><br>
-					<c:forEach var="album" items="${albums}">
-					<h4><font color="pink"><a href="getAlbum.do?id=${album.id}"> ${album.title}</a></font></h4>
-					<a href="deleteAlbums.do?albumId=${album.id}" class="btn btn-info btn-lg" role="button">Delete</a>					</c:forEach>
-					</div>
+		</div>
+		<br> <br>
+		<c:forEach var="album" items="${albums}">
+			<h4>
+				<font color="pink"><a href="getAlbum.do?albumId=${album.id}">
+						${album.title}</a></font>
+			</h4>
+		</c:forEach>
+		<a href="goToPad.do" class="btn btn-info btn-lg" role="button">Go
+			Home</a>
 	</div>
-<a href="goToPad.do" class="btn btn-info btn-lg" role="button">Go Home</a>
 </body>
 </html>
