@@ -17,11 +17,19 @@ pageEncoding="UTF-8"%>
 <div class="page-header">
 
 <c:forEach items="${artists}" var="artist">
-<h2 class="notePadHeader">${artist.name }</h2>
+<h2 class="notePadHeader">${artist.name }<br>Albums</h2>
+
 <c:forEach items="${artist.albums }" var="album">
 <br>
 <a href="getAlbum.do?id=${album.id}">${album.title}</a>
 <br>
+<c:if test="${playListId != null }">
+<form action="chooseSongToAddToPlayList.do">
+<input type="hidden" name="albumId" value="${album.id }" />
+<input type="hidden" name="playListId" value="${playListId }" />
+<input type="submit" name="" value="Add Song To Playlist From This Album" />
+</form>
+</c:if>
 </c:forEach>
 <br>
 <br>

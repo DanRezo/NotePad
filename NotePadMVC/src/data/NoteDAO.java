@@ -8,7 +8,7 @@ import entities.User;
 
 public interface NoteDAO {
 	
-	public Playlist addSongToPlaylist(Playlist playlist, Song song);
+	public Playlist addSongToPlaylist(int songId, int playListId);
 	public Playlist showPlaylist(int id);
 	public User createPlaylist(String title, User user);
 	public Playlist updatePlaylistTitle(int id, Playlist playlist);
@@ -16,5 +16,6 @@ public interface NoteDAO {
 	public Playlist removePlaylistUser(User user, Playlist playlist);
 	public User destroyPlaylist(User user, Playlist playlist);
 	public List<Playlist> showAllPlaylists();
+	public User getPlayListByUser(String alias);
 	
 }

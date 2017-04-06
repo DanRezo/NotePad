@@ -184,5 +184,39 @@ public class NoteController{
 		}
 		return mv;
 	}
+	@RequestMapping(path="addSongToExistingAlbum.do", params = "albumid", method = RequestMethod.GET)
+	public String addSongToExistingAlbum(Model model, @ModelAttribute("user") User user,
+			@RequestParam("playlistid") int id){
+
+		model.addAttribute("user", noteDAO.addPlaylistUser(user, id));
+		return "pad";
+	}
+	@RequestMapping(path="addSongToPlayList.do", method = RequestMethod.GET)
+	public ModelAndView choosePlayListToAddSongTo(Model model, @ModelAttribute("user") User user,
+			@RequestParam("playListId") int playListId,  @RequestParam("id") int songId){
+		
+		ModelAndView mv = new ModelAndView();
+		noteDAO.addSongToPlaylist(songId, playListId);
+		mv.setViewName("album");
+		return mv;
+	}
+	@RequestMapping(path="chooseSongFromAlbumToAddToPlayList.do", method = RequestMethod.GET)
+	public ModelAndView chooseSongFromAlbumToAddToPlayList(@RequestParam("id") int playListId, @ModelAttribute("user") User user){
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("playListId", playListId);
+		List<Artist> artists = padDAO.getArtists();
+		mv.addObject("artists", artists);
+		mv.setViewName("song");
+		return mv;
+	}
+	@RequestMapping(path="chooseSongToAddToPlayList.do", method = RequestMethod.GET)
+	public ModelAndView chooseSongToAddToPlayList(@RequestParam("playListId") int playListId, @RequestParam("albumId") int albumId, @ModelAttribute("user") User user){
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("playListId", playListId);
+		Album album = padDAO.getSongsByAlbumById(albumId);
+		mv.addObject("album", album);
+		mv.setViewName("album");
+		return mv;
+	}
 
 }

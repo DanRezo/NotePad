@@ -21,17 +21,15 @@ public class NoteDAOImpl implements NoteDAO {
 	private EntityManager em;
 
 	@Override
-	public Playlist addSongToPlaylist(Playlist playlist, Song song) {
-		List<Song> songs;
-		Playlist playList1 = playlist;
-		em.getTransaction().begin();
-		songs = playlist.getSongs();
-		songs.add(song);
-		playList1.setSongs(songs);
-		em.persist(playList1);
-		em.flush();
+	public Playlist addSongToPlaylist(int songId, int playListId) {
+		Song song = em.find(Song.class, songId);
+		System.out.println(playListId);
+		String query = "SELECT p FROM Playlist p WHERE p.id = :id";
+		Playlist p = em.createQuery(query, Playlist.class).setParameter("id", playListId).getSingleResult();
+		song.addPlayList(p);
+		em.merge(song);
 
-		return playList1;
+		return p;
 	}
 
 	@Override
@@ -202,5 +200,13 @@ public class NoteDAOImpl implements NoteDAO {
 		List<Playlist> playlists = em.createQuery(query, Playlist.class).getResultList();
 
 		return playlists;
+	}
+
+	@Override
+	public User getPlayListByUser(String alias) {
+		String query = "SELECT u FROM User u JOIN FETCH u.playlists where u.alias = :alias";
+
+		User user = em.createQuery(query, User.class).setParameter("alias", alias).getSingleResult();
+		return user;
 	}
 }

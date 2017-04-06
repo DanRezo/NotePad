@@ -21,21 +21,27 @@
 			<h1 class="notePadHeader">${album.title}</h1>
 			<br> <br>
 			<c:forEach items="${album.songs}" var="song">
-${song.title}   <a href="getAlbum.do?id=${song.id}">Add song to play
-					list</a>
-				<form action="editSongForm.do">
-					<button id="button" name="id" value="${song.id }" type="submit">Edit
-						Song</button>
-					<br> <input type="hidden" name="albumId" value="${album.id }" />
-				</form>
-				<br>
-				<form action="deleteSong.do">
-					<button id="button" name="id" value="${song.id}" type="submit">Remove
-						Song(Cannot be undone)</button>
-					<br>
-				</form>
+${song.title}
+<table> 
+<c:if test="${playListId != null }">
+   <td> <form action="addSongToPlayList.do">
+   	<input type="hidden" name="playListId" value="${playListId }" />
+   		<button id="button" name="id" value="${song.id}" type="submit">Add song to play	list</button>
+   			</form></td>
+   		</c:if>
+   		<c:if test="${playListId == null }">
+   		
+   <td> <form action="editSongForm.do">
+	    <button id="button" name="id" value="${song.id }" type="submit">Edit Song</button>
+		     <input type="hidden" name="albumId" value="${album.id }" />
+				</form></td>
+				
+   <td> <form action="deleteSong.do">
+		<button id="button" name="id" value="${song.id}" type="submit">Remove Song</button>
+				</form></td>
+				</c:if>
 
-
+</table>  
 			</c:forEach>
 			<a href="goToPad.do" class="btn btn-info btn-lg" role="button">Go
 				Home</a> <a href="getSongs.do">Back to Albums</a>

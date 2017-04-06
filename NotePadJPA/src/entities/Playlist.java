@@ -1,5 +1,6 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -60,6 +61,16 @@ public class Playlist {
 
 	public void setOwner(User owner) {
 		this.owner = owner;
+	}
+	
+	public void addSong(Song song){
+		if(songs != null){
+			songs.add(song);
+		}
+		else{
+			songs = new ArrayList<>();
+			songs.add(song);
+		}
 	}
 
 	@Override

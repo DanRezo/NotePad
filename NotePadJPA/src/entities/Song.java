@@ -1,5 +1,6 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -56,6 +57,15 @@ public class Song {
 		this.playlists = playlists;
 	}
 
+	public void addPlayList(Playlist p){
+		if(playlists != null){
+			playlists.add(p);
+		}
+		else{
+			playlists = new ArrayList<>();
+			playlists.add(p);
+		}
+	}
 	@Override
 	public String toString() {
 		return "Song [id=" + id + ", title=" + title + "]";
