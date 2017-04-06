@@ -26,7 +26,7 @@ pageEncoding="UTF-8"%>
 <c:when test="${userNotFound}">
 <h3>
 <em>User Name and Password do not match. Please try again.</em>
-</h3>
+</h3><br>
 <form action="login.do" method="POST">
 <div class="form-group">
 <input type="text" name="alias" value="${user.alias}"/>
@@ -53,7 +53,7 @@ pageEncoding="UTF-8"%>
 <c:when test="${aliasExists}">
 <h3>
 <em>This User name already exists. Please pick a different User name and try again.</em>
-</h3>
+</h3><br>
 <form action="createNewUser.do" method="POST">
 <input type="text" name="firstName" placeholder="${user.firstName}"/>
 <input type="text" name="lastName" placeholder="${user.lastName}"/><br><br>
