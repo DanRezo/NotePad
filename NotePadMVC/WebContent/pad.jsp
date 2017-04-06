@@ -31,5 +31,13 @@ pageEncoding="UTF-8"%>
 <div><a href="getSongs.do">Get Songs</a><a href="NewSongNewAlbum.do">Add Note</a></div>
 <h3>OR</h3>
 <a href="artist.do">Browse Artists</a>
+<br><br>
+
+<font color="#FF2400">
+<c:if test="${adminLevel == ADMIN}">
+<a href="admin.do">ADMIN</a>
+</c:if>
+</font>
+
 </body>
 </html>
