@@ -19,7 +19,7 @@ public class Song {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String title;
-	@ManyToOne(cascade= CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "album_id")
 	private Album album;
 	@ManyToMany
