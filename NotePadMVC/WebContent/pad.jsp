@@ -34,9 +34,11 @@ pageEncoding="UTF-8"%>
 <br><br>
 
 <font color="#FF2400">
-<c:if test="${adminLevel == ADMIN}">
+<c:choose>
+<c:when test="${isAdmin}">
 <a href="admin.do">ADMIN</a>
-</c:if>
+</c:when>
+</c:choose>
 </font>
 
 </body>

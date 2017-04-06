@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import data.LoginDAO;
+import entities.AdminLevel;
 import entities.User;
 
 @Controller
@@ -37,6 +38,7 @@ public class LoginController {
 		
 		if (user != null) {
 			model.addAttribute("user", user);
+			model.addAttribute("isAdmin", user.getAdminLevel() == AdminLevel.ADMIN);
 			return "pad";
 		} else {
 			model.addAttribute("user", userAttemptedLogin);
@@ -56,6 +58,7 @@ public class LoginController {
 		
 		if (user != null) {
 			model.addAttribute("user", user);
+			model.addAttribute("isAdmin", user.getAdminLevel() == AdminLevel.ADMIN);
 			return "pad";
 		} else {
 			model.addAttribute("aliasExists", true);

@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import data.NoteDAO;
 import data.PadDAO;
+import entities.AdminLevel;
 import entities.Album;
 import entities.Artist;
 import entities.Category;
@@ -197,6 +198,7 @@ public class NoteController{
 			@RequestParam("playlistid") int id){
 
 		model.addAttribute("user", noteDAO.addPlaylistUser(user, id));
+		model.addAttribute("isAdmin", user.getAdminLevel() == AdminLevel.ADMIN);
 		return "pad";
 	}
 	@RequestMapping(path="addSongToPlayList.do", method = RequestMethod.GET)
