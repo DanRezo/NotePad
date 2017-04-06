@@ -24,7 +24,7 @@ public class Album {
 	private String picture;
 	@OneToMany(mappedBy = "album", cascade= CascadeType.ALL)
 	private List<Song> songs;
-	@ManyToMany(mappedBy = "albums", cascade= CascadeType.ALL)
+	@ManyToMany(mappedBy = "albums")
 	private List<Artist> artists;
 
 	public List<Artist> getArtists() {

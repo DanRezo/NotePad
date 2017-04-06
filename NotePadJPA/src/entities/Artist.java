@@ -19,7 +19,7 @@ public class Artist {
 	private int id;
 	private String name;
 	private String picture;
-	@ManyToMany(cascade= CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(name = "album_artist", 
 	joinColumns = @JoinColumn(name = "artist_id"), 
 	inverseJoinColumns = @JoinColumn(name = "album_id"))
