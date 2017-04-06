@@ -20,7 +20,7 @@ pageEncoding="UTF-8"%>
 <h1 class="notePadHeader">Welcome to NotePad</h1>
 </div>
 <div class="loginForm">
-<div class="jumbotron">
+<div class="jumbotron notePadContainer">
 <c:choose>
 <c:when test="${userNotFound}">
 <h3>
