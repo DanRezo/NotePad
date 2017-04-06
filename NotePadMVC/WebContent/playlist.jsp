@@ -16,6 +16,7 @@ pageEncoding="UTF-8"%>
 <div class="container">
 <div class="page-header">
 <h1 class="notePadHeader">${playlist.title}</h1>
+<a href="goToPad.do" class="btn btn-info btn-lg" role="button">Go Home</a>
 </div>
 </div>
 <div class="container">
@@ -46,8 +47,6 @@ pageEncoding="UTF-8"%>
 <a href="NewSongNewAlbum.do">Create a New Song</a><br>
 <h3>OR</h3>
 <a href="deletePlaylist.do?playlistId=${playlist.id}">Delete this Playlist</a><br>
-<h3>OR</h3>
-<a href="goToPad.do" class="btn btn-info btn-lg" role="button">Go Home</a>
 </div>
 </div>
 </body>

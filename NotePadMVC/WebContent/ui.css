@@ -1,0 +1,61 @@
+html {
+	min-height:100vh;
+	
+}
+
+.loginForm {
+	text-align:center;
+}
+
+.input {
+	margin-bottom: 3px;
+}
+
+.notePadHeader {
+	font-family: 'Gloria Hallelujah', cursive;
+	color: white;
+	float: left;
+}
+
+body {
+	background-image: url("photos/notepadBGphoto.jpg");
+	background-size: 100% 100%;
+ 	background-repeat: no-repeat;
+}
+
+.container img {
+	max-height: 3.2vh;
+
+	border-radius: 70%;
+}
+
+ul{
+	list-style-type: none;
+}
+
+.albumForm{
+	margin-left: 62%;
+}
+
+.notePadContainer {
+   background: rgba(226, 229, 255, 0.5);
+}
+
+.notePadTable  {
+	padding: 3px 3px 3px 3px;
+}
+.main {
+   min-height: 40px;
+   padding-top:50px;
+}
+
+.noteLogo {
+	text-align:right;
+}
+
+.noteLogo img {
+	max-width: 4vw;
+	height: auto;
+	border-radius: 10px;
+	opacity: 0.1;
+}
