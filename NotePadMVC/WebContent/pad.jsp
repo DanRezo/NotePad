@@ -8,7 +8,7 @@ pageEncoding="UTF-8"%>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width = device-width, initial-scale = 1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Login</title>
+<title>NotePad</title>
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="npstyle.css"></head>
@@ -31,6 +31,9 @@ pageEncoding="UTF-8"%>
 <div><a href="getSongs.do">Get Songs</a><a href="NewSongNewAlbum.do">Add Note</a></div>
 <h3>OR</h3>
 <a href="artist.do">Browse Artists</a>
+<h3>OR</h3>
+<a href="logout.do" class="btn btn-info btn-lg"
+			role="button">Log Out</a>
 <br><br>
 
 <font color="#FF2400">

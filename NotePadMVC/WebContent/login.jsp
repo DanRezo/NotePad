@@ -29,7 +29,7 @@ pageEncoding="UTF-8"%>
 <form action="login.do" method="POST">
 <div class="form-group">
 <input type="text" name="alias" value="${user.alias}"/>
-<input type="password" name="password" placeholder="Password"/>
+<input type="password" name="password" placeholder="Password"/><br><br>
 <button type="submit" class="btn btn-info btn-lg">Login</button>
 </div>
 </form>
@@ -39,7 +39,7 @@ pageEncoding="UTF-8"%>
 <form action="login.do" method="POST">
 <div class="form-group">
 <input type="text" name="alias" placeholder="User name"/>
-<input type="password" name="password" placeholder="Password"/>
+<input type="password" name="password" placeholder="Password"/><br><br>
 <button type="submit" class="btn btn-info btn-lg">Login</button>
 </div>
 </form>
@@ -47,10 +47,32 @@ pageEncoding="UTF-8"%>
 </c:otherwise>
 </c:choose>
 <br>
-<div class="signIn">
-<h3>No account?</h3>
-<a href="signup.jsp" class="btn btn-info btn-lg" role="button">Sign Up</a>
-</div>
+<h3>No Account?</h3><br>
+<c:choose>
+<c:when test="${aliasExists}">
+<h3>
+<em>This User name already exists. Please pick a different User name and try again.</em>
+</h3>
+<form action="createNewUser.do" method="POST">
+<input type="text" name="firstName" placeholder="${user.firstName}"/>
+<input type="text" name="lastName" placeholder="${user.lastName}"/><br><br>
+<input type="text" name="alias" placeholder="User name"/>
+<input type="password" name="password" placeholder="New password"/><br><br>
+<button type="submit" class="btn btn-info btn-lg">Create New Account</button>
+</form>
+<br>
+</c:when>
+<c:otherwise>
+<form action="createNewUser.do" method="POST">
+<input type="text" name="firstName" placeholder="First name"/>
+<input type="text" name="lastName" placeholder="Last name"/><br><br>
+<input type="text" name="alias" placeholder="User name"/>
+<input type="password" name="password" placeholder="New password"/><br><br>
+<button type="submit" class="btn btn-info btn-lg">Create New Account</button>
+</form>
+<br>
+</c:otherwise>
+</c:choose>
 </div>
 </div>
 </div>
