@@ -21,11 +21,7 @@ pageEncoding="UTF-8"%>
 </div>
 <div class="container">
 <div class="notePadContainer">
-<%-- <c:choose>
-<c:when test="${notTheOwner}">
-<em>You can't delete this playlist.</em>
-</c:when>
-</c:choose> --%>
+
 <c:choose>
 <c:when test="${!emptyPlaylist}">
 <table>
@@ -42,7 +38,7 @@ pageEncoding="UTF-8"%>
 </table>
 </c:when>
 </c:choose>
-<a href="chooseSongFromAlbumToAddToPlayList.do?id=${playlist.id}">Add a song to this Playlist</a>
+<a href="chooseSongFromAlbumToAddToPlayList.do?playlistId=${playlist.id}">Add a song to this Playlist</a>
 <h3>OR</h3>
 <a href="NewSongNewAlbum.do">Create a New Song</a><br>
 <h3>OR</h3>

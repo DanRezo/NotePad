@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import data.LoginDAO;
+import entities.AdminLevel;
 import entities.User;
 
 @Controller
@@ -27,9 +28,16 @@ public class LoginController {
 	LoginDAO loginDAO;
 	
 	@RequestMapping(path = "welcome.do", method = RequestMethod.GET)
-	public String welcome() {
+	public String welcome(Model model, @ModelAttribute("user") User user) {
 		
-		return "login";
+		if(user.getId() == 0 ) {
+			return "login";
+		} else {
+			model.addAttribute("user", user);
+			model.addAttribute("isAdmin", user.getAdminLevel() == AdminLevel.ADMIN);
+			return "pad";
+		}
+		
 	}
 	
 	@RequestMapping(path = "login.do", method = RequestMethod.POST)
@@ -40,6 +48,7 @@ public class LoginController {
 		
 		if (user != null) {
 			model.addAttribute("user", user);
+			model.addAttribute("isAdmin", user.getAdminLevel() == AdminLevel.ADMIN);
 			return "pad";
 		} else {
 			model.addAttribute("user", userAttemptedLogin);
@@ -51,18 +60,21 @@ public class LoginController {
 	@RequestMapping(path = "createNewUser.do", method = RequestMethod.POST)
 	public String createNewUser(User newUser, Model model) {
 		
-		if (newUser.getId() != 0 ) {
-			newUser.setId(0);
-		}
+//		if (newUser.getId() != 0 ) {
+//			newUser.setId(0);
+//		}
 		
 		User user = loginDAO.createNewUser(newUser);
 		
 		if (user != null) {
 			model.addAttribute("user", user);
+			model.addAttribute("isAdmin", user.getAdminLevel() == AdminLevel.ADMIN);
 			return "pad";
 		} else {
 			model.addAttribute("aliasExists", true);
-			return "signup";
+			return "login";
 		}
 	}
 }
+	
+

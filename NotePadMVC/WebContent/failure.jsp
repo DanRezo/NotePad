@@ -18,17 +18,11 @@
 <body>
 	<div class="container">
 		<div class="page-header">
-			<h1 class="notePadHeader">Albums</h1>
+			<h1 class="notePadHeader">Oopsy Daisy, you can't do that</h1>
 		</div>
-		<br> <br>
-		<c:forEach var="album" items="${albums}">
-			<h4>
-				<font color="pink"><a href="getAlbum.do?albumId=${album.id}">
-						${album.title}</a></font>
-			</h4>
-		</c:forEach>
-		<a href="goToPad.do" class="btn btn-info btn-lg" role="button">Go
-			Home</a>
-	</div>
+
+
+		<br><center> <a href="goToPad.do" class="btn btn-info btn-lg"
+			role="button">Go Home</a></center>
 </body>
 </html>

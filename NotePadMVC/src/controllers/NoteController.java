@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import data.NoteDAO;
 import data.PadDAO;
+import entities.AdminLevel;
 import entities.Album;
 import entities.Artist;
 import entities.Category;
@@ -58,8 +59,8 @@ public class NoteController{
 	}
 
 	@RequestMapping(path="getAlbum.do", method = RequestMethod.GET)
-	public ModelAndView listSong(@RequestParam("id") int id){
-		Album album = padDAO.getSongsByAlbumById(id);
+	public ModelAndView listSong(@RequestParam("albumId") int albumId){
+		Album album = padDAO.getSongsByAlbumById(albumId);
 		mv.addObject("album", album);
 		mv.setViewName("album");
 		return mv;
@@ -99,24 +100,32 @@ public class NoteController{
 	@RequestMapping(path = "NewSongNewAlbum.do" , method = RequestMethod.GET)
 	public String routeToCreateNewSongWithNewAlbum(Model model, @ModelAttribute("user") User user){
 
-		List<String> genres = new ArrayList<>();
-
-		for(Category c : Category.values()) {
-			genres.add(c.toString());
-		}
-
-		model.addAttribute("genres", genres);
+		Category[] cats = Category.values();
+		
+		model.addAttribute("albums", padDAO.listAlbum());
+		model.addAttribute("cats", cats);
 		model.addAttribute("user", user);
 		return "create";
 	}
 
-	@RequestMapping(path = "createstuff.do", method = RequestMethod.POST)
-	public String createNewSongWithNewAlbum(Model model, @ModelAttribute("user") User user,
+	@RequestMapping(path = "createSongWithExistingAlbum.do", method = RequestMethod.POST)
+	public String createSongWithExistingAlbum(Model model, @ModelAttribute("user") User user,
+			String songTitle, int albumId) {
+
+		Album album = padDAO.addSongWithExistingAlbum(songTitle, albumId);
+
+		model.addAttribute("album", album);
+		return "album";
+	}
+	
+	@RequestMapping(path = "createSongWithNewAlubum.do", method = RequestMethod.POST)
+	public String createSongWithNewAlubum(Model model, @ModelAttribute("user") User user,
 			String songTitle, String artistName, String albumTitle, int albumYear,
-			String genre){
-
-		Album album = padDAO.addEverything(songTitle, artistName, albumTitle, albumYear, genre);
-
+			int genreId){
+		
+		Album album = padDAO.addSongWithNewAlubum(songTitle, artistName, albumTitle,
+				albumYear, genreId);
+		
 		model.addAttribute("album", album);
 		return "album";
 	}
@@ -158,9 +167,9 @@ public class NoteController{
 	}
 
 	@RequestMapping(path = "editSongForm.do" , method = RequestMethod.GET)
-	public ModelAndView editSongForm(@RequestParam("id") int id,@RequestParam("albumId") int albumId){
+	public ModelAndView editSongForm(@RequestParam("songId") int songId,@RequestParam("albumId") int albumId){
 		ModelAndView mv = new ModelAndView();
-		Song newSong = padDAO.getSongById(id);
+		Song newSong = padDAO.getSongById(songId);
 		Album album = padDAO.getAlbumById(albumId);
 		mv.setViewName("edit");
 		mv.addObject("song", newSong);
@@ -169,15 +178,15 @@ public class NoteController{
 	}
 
 	@RequestMapping(path = "editSong.do" , method = RequestMethod.GET)
-	public String editSong(@RequestParam("songId") int id, Song song){
-		Song newSong = padDAO.edit(id, song);
+	public String editSong(@RequestParam("songId") int songId, Song song){
+		Song newSong = padDAO.edit(songId, song);
 		mv.addObject("newSong", newSong);
 		return "edit";
 	}
 
 	@RequestMapping(path = "deleteSong.do", method = RequestMethod.GET)
-	public ModelAndView deleteSong(@RequestParam("id") int id){
-		if (padDAO.deleteSong(id))
+	public ModelAndView deleteSong(@RequestParam("songId") int songId){
+		if (padDAO.deleteSong(songId))
 		mv.setViewName("failure");
 		else{
 		mv.setViewName("sucesssong");
@@ -189,11 +198,12 @@ public class NoteController{
 			@RequestParam("playlistid") int id){
 
 		model.addAttribute("user", noteDAO.addPlaylistUser(user, id));
+		model.addAttribute("isAdmin", user.getAdminLevel() == AdminLevel.ADMIN);
 		return "pad";
 	}
 	@RequestMapping(path="addSongToPlayList.do", method = RequestMethod.GET)
 	public ModelAndView choosePlayListToAddSongTo(Model model, @ModelAttribute("user") User user,
-			@RequestParam("playListId") int playListId,  @RequestParam("id") int songId){
+			@RequestParam("playListId") int playListId,  @RequestParam("songId") int songId){
 		
 		ModelAndView mv = new ModelAndView();
 		noteDAO.addSongToPlaylist(songId, playListId);
@@ -201,7 +211,7 @@ public class NoteController{
 		return mv;
 	}
 	@RequestMapping(path="chooseSongFromAlbumToAddToPlayList.do", method = RequestMethod.GET)
-	public ModelAndView chooseSongFromAlbumToAddToPlayList(@RequestParam("id") int playListId, @ModelAttribute("user") User user){
+	public ModelAndView chooseSongFromAlbumToAddToPlayList(@RequestParam("playlistId") int playListId, @ModelAttribute("user") User user){
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("playListId", playListId);
 		List<Artist> artists = padDAO.getArtists();

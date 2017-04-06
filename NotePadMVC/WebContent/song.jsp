@@ -71,7 +71,7 @@
 		</div>
 	</div>
 			<c:forEach items="${artists}" var="artist">
-				<h2 class="notePadHeader">${artist.name }
+				<h2 class="notePadHeader">${artist.name}
 				</h2><br><br><br>
 
 				<c:forEach items="${artist.albums }" var="album">
@@ -91,5 +91,6 @@
 				<br>
 			</c:forEach>
 	</div>
+
 </body>
 </html>

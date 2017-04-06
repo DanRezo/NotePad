@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import data.NoteDAO;
 import data.PadDAO;
+import entities.AdminLevel;
 import entities.Album;
 import entities.Playlist;
 import entities.User;
@@ -28,10 +29,10 @@ public class PadController{
 	@Autowired
 	NoteDAO noteDAO;
 
-	@RequestMapping(value="retrievePlaylist.do", params = "id", method = RequestMethod.GET)
-	public String test(@RequestParam("id") int id, Model model){
+	@RequestMapping(value="retrievePlaylist.do", params = "playlistId", method = RequestMethod.GET)
+	public String test(@RequestParam("playlistId") int playlistId, Model model){
 
-		Playlist playlist = noteDAO.showPlaylist(id);
+		Playlist playlist = noteDAO.showPlaylist(playlistId);
 		
 		try {
 			playlist.getSongs().size();
@@ -59,6 +60,7 @@ public class PadController{
 		padDAO.deleteAlbum(albumId);
 		
 		model.addAttribute("user", user);
+		model.addAttribute("isAdmin", user.getAdminLevel() == AdminLevel.ADMIN);
 		return "pad";
 	}
 
@@ -67,6 +69,7 @@ public class PadController{
 			@ModelAttribute("user") User user){
 
 		model.addAttribute("user", noteDAO.createPlaylist(title, user));
+		model.addAttribute("isAdmin", user.getAdminLevel() == AdminLevel.ADMIN);
 		return "pad";
 	}
 
@@ -75,6 +78,7 @@ public class PadController{
 			@RequestParam("playlistid") int id){
 
 		model.addAttribute("user", noteDAO.addPlaylistUser(user, id));
+		model.addAttribute("isAdmin", user.getAdminLevel() == AdminLevel.ADMIN);
 		return "pad";
 	}
 	
@@ -82,6 +86,7 @@ public class PadController{
 	public String goToPad(Model model, @ModelAttribute("user") User user){
 		
 		model.addAttribute("user", user);
+		model.addAttribute("isAdmin", user.getAdminLevel() == AdminLevel.ADMIN);
 		return "pad";
 	}
 	
@@ -89,17 +94,10 @@ public class PadController{
 	public String deletePlaylist(Model model, @ModelAttribute("user") User user,
 			@RequestParam("playlistId") int playlistId){
 		
-		Playlist playlist = noteDAO.showPlaylist(playlistId);
-				
-		model.addAttribute("user", noteDAO.destroyPlaylist(user, playlist));
-		
-//		if (!successfulDelete) {
-//			model.addAttribute("notTheOwner", true);
-//			model.addAttribute("playlist", playlist);
-//			return "playlist";
-//		}
-		
-		
+		System.out.println(user + "****************&&&&&****************");
+
+		model.addAttribute("user", noteDAO.destroyPlaylist(user.getId(), playlistId));
+		model.addAttribute("isAdmin", user.getAdminLevel() == AdminLevel.ADMIN);
 		return "pad";
 	}
 	
