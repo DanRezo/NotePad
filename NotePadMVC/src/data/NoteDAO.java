@@ -14,7 +14,7 @@ public interface NoteDAO {
 	public Playlist updatePlaylistTitle(int id, Playlist playlist);
 	public User addPlaylistUser(User user, int playlistId);
 	public Playlist removePlaylistUser(User user, Playlist playlist);
-	public User destroyPlaylist(User user, Playlist playlist);
+	public User destroyPlaylist(int userId, int playlistId);
 	public List<Playlist> showAllPlaylists();
 	public User getPlayListByUser(String alias);
 	

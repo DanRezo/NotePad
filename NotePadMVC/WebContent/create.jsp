@@ -16,23 +16,41 @@ pageEncoding="UTF-8"%>
 <div class="page-header">
 <h1 class="notePadHeader">${user.alias}</h1>
 </div>
-<div class="container">
 
-<form action="createstuff.do" method="POST">
+<div class="loginForm">
+<div class="jumbotron notePadContainer">
+<h2>Add a New Song on a New Album</h2>
+<form action="createSongWithNewAlubum.do" method="POST">
 <div class="form-group">
 <input type="text" name="songTitle" placeholder="Song Title"/><br>
 <input type="text" name="artistName" placeholder="Artist Name"/><br>
 <input type="text" name="albumTitle" placeholder="Album Title"/><br>
 <input type="text" name="albumYear" placeholder="Album Year"/><br>
-<select>
-<c:forEach var="genre" items="${genres}">
-  <option name="genre">${genre}</option>
+<select name="genreId">
+  <option value="1">Country</option>
+  <option value="2">Hip Hop</option>
+  <option value="3">Pop</option>
+  <option value="4">R&B</option>
+  <option value="5">Rock</option>
+</select><br>
+<button type="submit" class="btn btn-info btn-lg">Create The Song</button>
+</div>
+</form>
+<h1>OR</h1>
+<h2>Add a New Song on an Existing Album</h2>
+<form action="createSongWithExistingAlbum.do" method="POST">
+<div class="form-group">
+<input type="text" name="songTitle" placeholder="Song Title"/><br>
+<select name="albumId" >
+<c:forEach var="album" items="${albums}">
+  <option value="${album.id}">${album.title}</option>
 </c:forEach>
 </select><br>
 <button type="submit" class="btn btn-info btn-lg">Create The Song</button>
 </div>
 </form>
-</div>
 <a href="goToPad.do" class="btn btn-info btn-lg" role="button">Go Home</a>
+</div>
+</div>
 </body>
 </html>

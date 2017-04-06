@@ -26,18 +26,18 @@ ${song.title}
 <c:if test="${playListId != null }">
    <td> <form action="addSongToPlayList.do">
    	<input type="hidden" name="playListId" value="${playListId }" />
-   		<button id="button" name="id" value="${song.id}" type="submit">Add song to play	list</button>
+   		<button id="button" name="songId" value="${song.id}" type="submit">Add song to play	list</button>
    			</form></td>
    		</c:if>
    		<c:if test="${playListId == null }">
    		
    <td> <form action="editSongForm.do">
-	    <button id="button" name="id" value="${song.id }" type="submit">Edit Song</button>
+	    <button id="button" name="songId" value="${song.id }" type="submit">Edit Song</button>
 		     <input type="hidden" name="albumId" value="${album.id }" />
 				</form></td>
 				
    <td> <form action="deleteSong.do">
-		<button id="button" name="id" value="${song.id}" type="submit">Remove Song</button>
+		<button id="button" name="songId" value="${song.id}" type="submit">Remove Song</button>
 				</form></td>
 				</c:if>
 

@@ -295,60 +295,75 @@ public class PadDAOImpl  implements PadDAO{
 	}
 
 	@Override
-	public Album addEverything(String songTitle, String artistName,
-			String albumTitle, int albumYear, String genre) {
+	public Album addSongWithNewAlubum(String songTitle, String artistName, String albumTitle,
+			int albumYear, int genreId) {
+		
+		Genre managedGenre = em.find(Genre.class, genreId);
+		List<Genre> genreList = new ArrayList<>();
+		genreList.add(managedGenre);
+		
+		Artist newArtist = new Artist();
+		newArtist.setName(artistName);
+		
+//		System.out.println("************************ persist new artist");
+		em.persist(newArtist);
+		
+		List<Artist> artistList = new ArrayList<>();
+		artistList.add(newArtist);
 
+		Album newAlbum = new Album();
+		newAlbum.setTitle(albumTitle);
+		newAlbum.setReleaseYear(albumYear);
+		newAlbum.setGenres(genreList);
+		newAlbum.setArtists(artistList);
+		
+//		System.out.println("************************ persist new album");
+		em.persist(newAlbum);
+		
+		Song newSong = new Song();
+		newSong.setTitle(songTitle);
+		newSong.setAlbum(newAlbum);
+		
+//		System.out.println("************************ persist new song");
+		em.persist(newSong);
+		
+		List<Song> songList = new ArrayList<>();
+		songList.add(newSong);
+		
+		List<Album> albumList = new ArrayList<>();
+		albumList.add(newAlbum);
+		newArtist.setAlbums(albumList);
+		
+//		System.out.println("************************ persist new artist with album");
+		em.persist(newArtist);		
+		
+//		System.out.println("************************ persist new album with song");
+		newAlbum.setSongs(songList);
+		em.persist(newAlbum);
+		
+		em.flush();
+		newAlbum.getSongs().size();
+		
+		return newAlbum;
+	}
+
+	@Override
+	public Album addSongWithExistingAlbum(String songTitle, int albumId) {
+
+		Album managedAlbum = em.find(Album.class, albumId);
+		
 		Song song = new Song();
 		song.setTitle(songTitle);
+		song.setAlbum(managedAlbum);
 		
-		Album album = null;
+		managedAlbum.getSongs().add(song);
 		
-		try {
-			String queryString = "Select a From Album AS a WHERE a.title = :title";
-			album = em.createQuery(queryString, Album.class)
-					.setParameter("title", albumTitle).getSingleResult();
-			song.setAlbum(album);
-			
-			album.getSongs().size();
-			
-			em.persist(song);
-			em.flush();
-			
-		} catch (NoResultException e) {
-			
-			album = new Album();
-			album.setTitle(albumTitle);
-			album.setReleaseYear(albumYear);
-			
-			List<Album> albumList = new ArrayList<Album>();
-			albumList.add(album);
-			
-			Artist newArtist = new Artist();
-			newArtist.setName(artistName);
-			List<Artist> artistList = new ArrayList<Artist>();
-			artistList.add(newArtist);
-			album.setArtists(artistList);
-			
-			newArtist.setAlbums(albumList);
-			
-			Genre newGenre = new Genre();
-//			newGenre.setGenre(entities.Category.valueOf(genre));
-			newGenre.setGenre(entities.Category.COUNTRY);
-			List<Genre> genreList = new ArrayList<Genre>();
-			genreList.add(newGenre);
-			album.setGenres(genreList);
-			
-			List<Song> songList = new ArrayList<Song>();
-			songList.add(song);
-			
-			album.setSongs(songList);
-//			song.setAlbum(album);
-			
-			em.persist(album);
-			em.persist(song);
-			em.flush();
-		}
+		em.persist(managedAlbum);
+		em.persist(song);
+		em.flush();
 		
-		return album;
+		managedAlbum.getSongs().size();
+		
+		return managedAlbum;
 	}
 }

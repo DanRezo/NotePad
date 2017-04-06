@@ -28,10 +28,10 @@ public class PadController{
 	@Autowired
 	NoteDAO noteDAO;
 
-	@RequestMapping(value="retrievePlaylist.do", params = "id", method = RequestMethod.GET)
-	public String test(@RequestParam("id") int id, Model model){
+	@RequestMapping(value="retrievePlaylist.do", params = "playlistId", method = RequestMethod.GET)
+	public String test(@RequestParam("playlistId") int playlistId, Model model){
 
-		Playlist playlist = noteDAO.showPlaylist(id);
+		Playlist playlist = noteDAO.showPlaylist(playlistId);
 		
 		try {
 			playlist.getSongs().size();
@@ -89,16 +89,9 @@ public class PadController{
 	public String deletePlaylist(Model model, @ModelAttribute("user") User user,
 			@RequestParam("playlistId") int playlistId){
 		
-		Playlist playlist = noteDAO.showPlaylist(playlistId);
-				
-		model.addAttribute("user", noteDAO.destroyPlaylist(user, playlist));
-		
-//		if (!successfulDelete) {
-//			model.addAttribute("notTheOwner", true);
-//			model.addAttribute("playlist", playlist);
-//			return "playlist";
-//		}
-		
+		System.out.println(user + "****************&&&&&****************");
+
+		model.addAttribute("user", noteDAO.destroyPlaylist(user.getId(), playlistId));
 		
 		return "pad";
 	}

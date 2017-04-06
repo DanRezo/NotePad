@@ -1,5 +1,6 @@
 package data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -56,11 +57,27 @@ public class NoteDAOImpl implements NoteDAO {
 		
 		playlist.setTitle(title);
 		playlist.setOwner(managedUser);
-
-		managedUser.getOwnedPlaylists().add(playlist);
-		managedUser.getPlaylists().add(playlist);
-
+		
+		List<Playlist> playlistList = new ArrayList<>();
+		playlistList.add(playlist);
+		
 		em.persist(playlist);
+
+		try {
+			managedUser.getOwnedPlaylists().add(playlist);
+		} catch (NullPointerException e) {
+			managedUser.setOwnedPlaylists(playlistList);
+//			e.printStackTrace();
+		}
+		
+		try {
+			managedUser.getPlaylists().add(playlist);
+		} catch (NullPointerException e) {
+			managedUser.setPlaylists(playlistList);
+//			e.printStackTrace();
+		}
+
+//		em.persist(playlist);
 		em.persist(managedUser);
 		em.flush();
 
@@ -90,62 +107,46 @@ public class NoteDAOImpl implements NoteDAO {
 	}
 
 	@Override
-	public User destroyPlaylist(User user, Playlist playlist) {
+	public User destroyPlaylist(int userId, int playlistId) {
 		
-		User managedUser = user;
-		Playlist managedPlaylist = playlist;
+		Playlist managedPlaylist = em.find(Playlist.class, playlistId);
+		User managedUser = em.find(User.class, userId);		
 		
-		System.out.println(managedUser);
-		System.out.println("*******************************************************"); 
-		
-		try {			
-			managedUser = em.find(User.class, user.getId());			
-			managedPlaylist = em.find(Playlist.class, playlist.getId());
-			
-			
-			System.out.println(managedUser);
-			
-			System.out.println("*******************************************************"); 
-			System.out.println("successful try"); 
-		} catch (NoResultException e) {
-			
-			System.out.println("*******************************************************"); 
-			System.out.println("unsuccessful try"); 
-			return managedUser;
-		}
+		System.out.println(managedPlaylist + "**************************");
+		System.out.println(managedUser + "**************************");
 
 		if (managedUser.getId() == managedPlaylist.getOwner().getId() 
 				&& managedPlaylist != null) {
 			
-			System.out.println(managedPlaylist.getId());
-			
-			String query = "Delete from Playlist where id=:id";
-			em.createQuery(query).setParameter("id", managedPlaylist.getId()).executeUpdate();
-//			em.remove(managedPlaylist);		
+			System.out.println("in if beginning **************************");
+
+						
+			String query = "DELETE FROM Playlist WHERE id = :id";
+			em.createQuery(query).setParameter("id", playlistId).executeUpdate();
 			em.flush();
-			System.out.println("*******************************************************"); 
-			System.out.println("successful if"); 
-//			if (em.contains(playlist)) {
-//				return false;
-//			} else {
-//				return true;
-//			}
+			
+			System.out.println("in if end **************************");
 			
 		} else  {
 			
 			managedUser.getPlaylists().remove(managedPlaylist);
 			em.persist(managedUser);
-			System.out.println("*******************************************************"); 
-			System.out.println("unsuccessful if"); 
+			em.flush();
+
 		}
 		
-		try {
-			String selectQuery = "SELECT u FROM User AS u JOIN FETCH u.playlists WHERE u.id = :id";
-			managedUser = em.createQuery(selectQuery, User.class).setParameter("id", user.getId()).getSingleResult();
-		} catch (NoResultException e) {
-
-			managedUser = em.find(User.class, user.getId());
-		}	
+//		try {
+//			
+//			String selectQuery = "SELECT u FROM User AS u JOIN FETCH u.playlists WHERE u.id = :id";
+//			managedUser = em.createQuery(selectQuery, User.class).setParameter("id", userId)
+//					.getSingleResult();
+//			
+//		} catch (NoResultException e) {
+//
+//			managedUser = em.find(User.class, userId);
+//		}
+		
+		managedUser.getPlaylists().size();
 		
 		return managedUser;
 	}

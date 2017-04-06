@@ -21,7 +21,7 @@ pageEncoding="UTF-8"%>
 
 <c:forEach items="${artist.albums }" var="album">
 <br>
-<a href="getAlbum.do?id=${album.id}">${album.title}</a>
+<a href="getAlbum.do?albumId=${album.id}">${album.title}</a>
 <br>
 <c:if test="${playListId != null }">
 <form action="chooseSongToAddToPlayList.do">

@@ -18,7 +18,7 @@ pageEncoding="UTF-8"%>
 <h1 class="notePadHeader">${user.alias}</h1>
 </div>
 <c:forEach var="playlist" items="${user.playlists}">
-	<h2><a href="retrievePlaylist.do?id=${playlist.id}">${playlist.title}</a></h2>
+	<h2><a href="retrievePlaylist.do?playlistId=${playlist.id}">${playlist.title}</a></h2>
 </c:forEach>
 </div>
 <form action="createPlaylist.do" method="POST">
