@@ -32,7 +32,7 @@ With many ManyToMany relationships in our schema the team encountered instances 
 
 ## How to Execute
 - The web-app is hosted on my AWS server: <a href="http://danrezo.com/">**here**</a>
-- Download the entire program as a .war file <a href="https://github.com/DanRezo/NotePad/blob/master/NotePadMVC/NotePadMVC.war">**here**</a>
+- Download the entire program as a .war file <a href="https://github.com/DanRezo/NotePad/blob/master/NotePadMVC.war">**here**</a>
 
 ## Instructions
 1. User arrives on Login page.
@@ -62,6 +62,20 @@ public List <Song> getSongsByGenre(int id) {
 		return songs;
 	}
 
+```
+
+```java
+@RequestMapping(path = "logout.do", method = RequestMethod.GET)
+public String logout(User newUser, Model model) {
+
+        model.addAttribute("user", new User());
+        return "login";
+
+}
+```
+
+```HTML
+<%@ include file="footer.jsp"%>
 ```
 
 ## Technologies Used
