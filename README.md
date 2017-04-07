@@ -17,8 +17,20 @@ This collaborative project was kept on track with the utilization of a Trello bo
 ## Issues The Team Ran Into:
 With many ManyToMany relationships in our schema the team encountered instances where retrieving certain information about songs difficult. One instance was with the genre. Songs are entities which take an album_id and inherit the Genre based on that album. We couldn't retrieve this without first querying the genre by id and then create a new ArrayList our song entity. Then, we iterated over the Album entity looking for genres of those albums and added all songs of those albums into the list of songs created earlier.
 
-
 [Code Examples](#code-examples)
+
+## Know Issues
+- No validation for entries that already exist.
+- Form validation was not completed.
+- Navigation through the browser back button results in a break.
+- Administration deletion has to be done by
+  1. Songs
+  2. Artists
+  3. Album
+
+
+
+
 
 ## If More Time Were Available:
   Stretch goals for the project include:
@@ -31,8 +43,8 @@ With many ManyToMany relationships in our schema the team encountered instances 
 2. [Class Structure Overview](#class-structure-overview)
 
 ## How to Execute
-- The web-app is hosted on my AWS server: <a href="https://github.com/DanRezo/NotePad/blob/master/NotePadMVC/NotePadMVC.war">**here**</a>
-- Download the entire program as a .war file <a href="ComingSoon">**here**</a>
+- The web-app is hosted on my AWS server: <a href="http://danrezo.com/">**here**</a>
+- Download the entire program as a .war file <a href="https://github.com/DanRezo/NotePad/blob/master/NotePadMVC.war">**here**</a>
 
 ## Instructions
 1. User arrives on Login page.
@@ -62,6 +74,20 @@ public List <Song> getSongsByGenre(int id) {
 		return songs;
 	}
 
+```
+
+```java
+@RequestMapping(path = "logout.do", method = RequestMethod.GET)
+public String logout(User newUser, Model model) {
+
+        model.addAttribute("user", new User());
+        return "login";
+
+}
+```
+
+```HTML
+<%@ include file="footer.jsp"%>
 ```
 
 ## Technologies Used
