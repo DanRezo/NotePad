@@ -31,8 +31,8 @@ With many ManyToMany relationships in our schema the team encountered instances 
 2. [Class Structure Overview](#class-structure-overview)
 
 ## How to Execute
-- The web-app is hosted on my AWS server: <a href="https://github.com/DanRezo/NotePad/blob/master/NotePadMVC/NotePadMVC.war">**here**</a>
-- Download the entire program as a .war file <a href="ComingSoon">**here**</a>
+- The web-app is hosted on my AWS server: <a href="http://danrezo.com/">**here**</a>
+- Download the entire program as a .war file <a href="https://github.com/DanRezo/NotePad/blob/master/NotePadMVC/NotePadMVC.war">**here**</a>
 
 ## Instructions
 1. User arrives on Login page.
