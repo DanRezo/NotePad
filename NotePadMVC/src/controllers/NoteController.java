@@ -81,8 +81,6 @@ public class NoteController{
 
 	@RequestMapping(path = "newArtist.do", method = RequestMethod.GET)
 	public ModelAndView createArtist(){
-//		Artist newArtist = padDAO.createNewArtist(artist);
-//		mv.addObject("newArtist", newArtist);
 		mv.setViewName("album");
 		return mv;
 	}

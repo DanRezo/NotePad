@@ -8,7 +8,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width = device-width, initial-scale = 1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Login</title>
+<title>Album</title>
 <link rel="stylesheet" type="text/css"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah"
@@ -21,7 +21,7 @@
 			<h1 class="notePadHeader">${album.title}</h1>
 			<br> <br>
 			<c:forEach items="${album.songs}" var="song">
-${song.title}
+<span class="songTitle">${song.title}</span>
 <table> 
 <c:if test="${playListId != null }">
    <td> <form action="addSongToPlayList.do">
@@ -49,4 +49,6 @@ ${song.title}
 		</div>
 	</div>
 </body>
+<!-- footer code fragment -->
+<%@ include file="footer.jsp"%>
 </html>

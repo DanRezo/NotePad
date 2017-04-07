@@ -8,7 +8,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width = device-width, initial-scale = 1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Login</title>
+<title>Songs</title>
 <link rel="stylesheet" type="text/css"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah"
@@ -76,7 +76,7 @@
 
 				<c:forEach items="${artist.albums }" var="album">
 					<br>
-					<a href="getAlbum.do?id=${album.id}">${album.title}</a>
+					<a href="getAlbum.do?albumId=${album.id}">${album.title}</a>
 					<br>
 					<c:if test="${playListId != null }">
 						<form action="chooseSongToAddToPlayList.do">

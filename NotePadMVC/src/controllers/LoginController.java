@@ -59,11 +59,7 @@ public class LoginController {
 	
 	@RequestMapping(path = "createNewUser.do", method = RequestMethod.POST)
 	public String createNewUser(User newUser, Model model) {
-		
-//		if (newUser.getId() != 0 ) {
-//			newUser.setId(0);
-//		}
-		
+	
 		User user = loginDAO.createNewUser(newUser);
 		
 		if (user != null) {
@@ -74,7 +70,17 @@ public class LoginController {
 			model.addAttribute("aliasExists", true);
 			return "login";
 		}
+		
 	}
+	
+	  @RequestMapping(path = "logout.do", method = RequestMethod.GET)
+	    public String logout(User newUser, Model model) {
+
+	            model.addAttribute("user", new User());
+	            return "login";
+
+	    }
+	
 }
 	
 

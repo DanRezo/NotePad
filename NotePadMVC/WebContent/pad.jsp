@@ -8,7 +8,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width = device-width, initial-scale = 1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<<<<<<< HEAD
 <title>${user.alias}</title>
 <link rel="stylesheet" type="text/css"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -53,7 +52,7 @@
 	<div class="navbar navbar-inverse navbar-static-top">
 		<div class="container">
 			<a href="#" class="navbar-brand">NotePad</a>
-			<a href="#" class="navbar-brand"><img src="./photos/noteLogo.png"></a>
+			<a href="NewSongNewAlbum.do" class="navbar-brand"><img src="./photos/noteLogo.png"></a>
 
 			<button class="navbar-toggle" data-toggle="collapse"
 				data-target=".navHeaderCollapse">
@@ -89,7 +88,17 @@
 	<div class="container">
 		<div class="page-header">
 			<ul>
-				<li><h1 class="notePadHeader">${user.alias}</h1></li>
+				<li><h1 class="notePadHeader">${user.alias}</h1><a></a>
+				
+				<font color="#FF2400">
+<c:choose>
+<c:when test="${isAdmin}">
+<a href="admin.do">ADMIN</a>
+</c:when>
+</c:choose>
+</font>
+				
+				</li>
 
 				<li class="albumForm"><form action="createPlaylist.do"
 						method="POST">
@@ -101,22 +110,13 @@
 		</div>
 		<c:forEach var="playlist" items="${user.playlists}">
 			<h2>
-				<a href="retrievePlaylist.do?id=${playlist.id}">${playlist.title}</a>
+				<a href="retrievePlaylist.do?playlistId=${playlist.id}">${playlist.title}</a>
 			</h2>
 		</c:forEach>
 		
 	</div>
-=======
-<a href="logout.do" class="btn btn-info btn-lg"
-			role="button">Log Out</a>
 <br><br>
-
-<font color="#FF2400">
-<c:choose>
-<c:when test="${isAdmin}">
-<a href="admin.do">ADMIN</a>
-</c:when>
-</c:choose>
-</font>
 </body>
+<!-- footer code fragment -->
+<%@ include file="footer.jsp"%>
 </html>

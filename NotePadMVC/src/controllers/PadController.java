@@ -101,9 +101,4 @@ public class PadController{
 		return "pad";
 	}
 	
-//	@RequestMapping(path="editPlaylist.do", method = RequestMethod.GET)
-//	public String editPlaylist() {
-//
-//	}
-
 }
