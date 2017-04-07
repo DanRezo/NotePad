@@ -23,7 +23,7 @@
 		<br> <br>
 		<c:forEach var="album" items="${albums}">
 			<h4>
-				<font color="pink"><a href="getAlbum.do?albumId=${album.id}">
+				<font color="white"><a href="getAlbum.do?albumId=${album.id}">
 						${album.title}</a></font>
 			</h4>
 		</c:forEach>

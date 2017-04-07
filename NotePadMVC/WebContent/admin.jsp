@@ -46,7 +46,7 @@
 
 
 		<form action="deleteSong.do">
-			<select name="id">
+			<select name="songId">
 				<c:forEach items="${songs}" var="song">
 					<option value="${song.id}">${song.title}</option>
 				</c:forEach>
