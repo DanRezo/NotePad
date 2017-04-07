@@ -21,7 +21,7 @@
 			<h1 class="notePadHeader">${album.title}</h1>
 			<br> <br>
 			<c:forEach items="${album.songs}" var="song">
-<span class="songTitle">${song.title}</span>
+<span class="songTitle" style="color:white">${song.title}</span>
 <table> 
 <c:if test="${playListId != null }">
    <td> <form action="addSongToPlayList.do">
